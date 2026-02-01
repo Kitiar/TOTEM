@@ -20,3 +20,5 @@
 #undef LOCKING_RESYNC_ENABLE
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
+
+#define EE_HANDS // Split handedness via eeprom. from root config.h
