@@ -12,6 +12,8 @@
 */
 
 #include QMK_KEYBOARD_H
+#include "keymap_us_extended.h"
+#include "keymap_russian.h"
 
 // ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ D E F I N I T I O N S                                                                                                  │
@@ -24,17 +26,10 @@
 
 enum totem_layers {
     _QWERTY,
-    _COLEMAK,
     _LOWER,
     _RAISE,
     _ADJUST,
 };
-
-// ┌─────────────────────────────────────────────────┐
-// │ d e f i n e   k e y c o d e s                   │
-// └─────────────────────────────────────────────────┘
-
-enum custom_keycodes { COLEMAK = SAFE_RANGE, QWERTY, LOWER, RAISE, ADJUST, OS_SWAP, MAKE_H, SNAP };
 
 // ┌─────────────────────────────────────────────────┐
 // │ d e f i n e   m a c r o n a m e s               │
@@ -42,35 +37,27 @@ enum custom_keycodes { COLEMAK = SAFE_RANGE, QWERTY, LOWER, RAISE, ADJUST, OS_SW
 
 // LEFT HAND HOME ROW MODS QWERTY ├──────────────────┐
 
-#define GUI_A MT(MOD_LGUI, KC_A)
-#define ALT_S MT(MOD_LALT, KC_S)
 #define CTL_S MT(MOD_LCTL, KC_S)
 #define ALT_D MT(MOD_LALT, KC_D)
-#define CTL_D MT(MOD_LCTL, KC_D)
 #define SHT_F MT(MOD_LSFT, KC_F)
 
 // RIGHT HAND HOME ROW MODS QWERTY ├─────────────────┐
 
 #define SHT_J MT(MOD_RSFT, KC_J)
-#define CTL_K MT(MOD_LCTL, KC_K)
-#define ALT_K MT(MOD_LALT, KC_K)
-#define CTL_L MT(MOD_LCTL, KC_L)
-#define ALT_L MT(MOD_LALT, KC_L)
-#define GUI_S MT(MOD_LGUI, KC_SCLN)
+#define ALT_K MT(MOD_RALT, KC_K)
+#define CTL_L MT(MOD_RCTL, KC_L)
 
-// LEFT HAND HOME ROW MODS COLEMAK ├─────────────────┐
+// LEFT HAND HOME ROW MODS LOWER ├──────────────────┐
 
-#define GUI_A MT(MOD_LGUI, KC_A)
-#define ALT_R MT(MOD_LALT, KC_R)
-#define CTL_S MT(MOD_LCTL, KC_S)
-#define SHT_T MT(MOD_LSFT, KC_T)
+#define CTL_LEFT MT(MOD_LCTL, KC_LEFT)
+#define ALT_DOWN MT(MOD_LALT, KC_DOWN)
+#define SHT_RGHT MT(MOD_LSFT, KC_RGHT)
 
-// RIGHT HAND HOME ROW MODS COLEMAK ├────────────────┐
+// RIGHT HAND HOME ROW MODS LOWER ├─────────────────┐
 
-#define SHT_N MT(MOD_RSFT, KC_N)
-#define CTL_E MT(MOD_LCTL, KC_E)
-#define ALT_I MT(MOD_LALT, KC_I)
-#define GUI_O MT(MOD_LGUI, KC_O)
+#define SHT_P4 MT(MOD_RSFT, KC_P4)
+#define ALT_P5 MT(MOD_RALT, KC_P5)
+#define CTL_P6 MT(MOD_RCTL, KC_P6)
 
 #define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ESC)
@@ -110,7 +97,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*    ╌┄┈┈──═*/  KC_CAPS ,  KC_NUM  ,   KC_UP  ,  KC_EQL  ,  KC_LCBR  ,   KC_RCBR ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  KC_PPLS ,
     //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
     //            │   PG UP  │     ←    │     ↓    │     →    │     [    │ │     ]    │     4    │     5    │     6    │     -    │
-    /*           */  KC_PGUP ,  KC_LEFT ,  KC_DOWN ,  KC_RGHT ,  KC_LBRC  ,   KC_RBRC ,   KC_P4  ,   KC_P5  ,   KC_P6  ,  KC_MINS ,
+    /*           */ KC_PGUP  , CTL_LEFT , ALT_DOWN , SHT_RGHT , KC_LBRC   ,   KC_RBRC ,  SHT_P4  ,  ALT_P5  ,  CTL_P6  ,  KC_MINS ,
+    //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
     // │    ESC   │  PG DOWN │   HOME   │   SAVE   │   END    │     (    │ │     )    │     1    │     2    │     3    │     *    │    GUI   │
     /**/ _______  ,  KC_PGDN ,  KC_QUOT ,  C(KC_S) ,  KC_END  , KC_LPRN   ,   KC_RPRN ,   KC_P1  ,   KC_P2  ,   KC_P3  ,  KC_PAST ,  _______ ,
@@ -159,67 +147,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, RALT(KC_U), RALT(KC_3), KC_BSLS, RALT(KC_A), RALT(KC_F), RALT(KC_S), RALT(KC_G), XXXXXXX, XXXXXXX, LSFT(RALT(KC_4)), RALT(KC_5), RALT(KC_4), RALT(KC_O), XXXXXXX, LSFT(KC_GRV), KC_TILD, RALT(KC_C), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DM_REC1, DM_RSTP, DM_PLY1, _______, ADJUST, _______, _______, _______, _______),
 };
 
-// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ M A C R O S                                                                                                            │
-// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case OS_SWAP:
-            if (record->event.pressed) {
-                if (!keymap_config.swap_lctl_lgui) {
-                    keymap_config.swap_lctl_lgui = true; // ─── MAC
-                } else {
-                    keymap_config.swap_lctl_lgui = false; // ─── WIN
-                }
-                eeconfig_update_keymap((void *) &keymap_config.raw);
-                clear_keyboard(); // ──── clear to prevent stuck keys
-                return false;
-            }
-
-            // ┌─────────────────────────────────────────────────┐
-            // │ l a y e r                                       │
-            // └─────────────────────────────────────────────────┘
-
-//        case COLEMAK:
-//            if (record->event.pressed) {
-//                set_single_persistent_default_layer(_COLEMAK);
-//            }
-//            return false;
-        case QWERTY:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY);
-            }
-            return false;
-
-            // ┌─────────────────────────────────────────────────┐
-            // │ q m k                                           │
-            // └─────────────────────────────────────────────────┘
-
-        case MAKE_H:
-            if (record->event.pressed) {
-                SEND_STRING("qmk compile -kb totem -km default");
-                tap_code(KC_ENTER);
-            }
-            break;
-
-            // ┌─────────────────────────────────────────────────┐
-            // │ p r o d u c t i v i t y                         │
-            // └─────────────────────────────────────────────────┘
-
-        case SNAP:
-            if (record->event.pressed) {
-                if (keymap_config.swap_lctl_lgui) {
-                    SEND_STRING(SS_LSFT(SS_LCMD(SS_LCTL("4")))); // MAC
-                } else {
-                    SEND_STRING(SS_LSFT(SS_LWIN("S"))); // WIN
-                }
-            }
-            break;
-    }
-    return true;
-}
 /*
   ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
 
