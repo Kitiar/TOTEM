@@ -25,7 +25,8 @@
 // └─────────────────────────────────────────────────┘
 
 enum totem_layers {
-    _QWERTY,
+    _US,
+    _RUS,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -37,15 +38,15 @@ enum totem_layers {
 
 // LEFT HAND HOME ROW MODS QWERTY ├──────────────────┐
 
-#define CTL_S MT(MOD_LCTL, KC_S)
-#define ALT_D MT(MOD_LALT, KC_D)
-#define SHT_F MT(MOD_LSFT, KC_F)
+#define CTL_S MT(MOD_LCTL, US_S)
+#define ALT_D MT(MOD_LALT, US_D)
+#define SHT_F MT(MOD_LSFT, US_F)
 
 // RIGHT HAND HOME ROW MODS QWERTY ├─────────────────┐
 
-#define SHT_J MT(MOD_RSFT, KC_J)
-#define ALT_K MT(MOD_RALT, KC_K)
-#define CTL_L MT(MOD_RCTL, KC_L)
+#define SHT_J MT(MOD_RSFT, US_J)
+#define ALT_K MT(MOD_RALT, US_K)
+#define CTL_L MT(MOD_RCTL, US_L)
 
 // LEFT HAND HOME ROW MODS LOWER ├──────────────────┐
 
@@ -59,6 +60,8 @@ enum totem_layers {
 #define ALT_P5 MT(MOD_RALT, KC_P5)
 #define CTL_P6 MT(MOD_RCTL, KC_P6)
 
+#define US DF(_US)
+#define RUS DF(_RUS)
 #define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ESC)
 #define ADJUST MO(_ADJUST)
@@ -71,18 +74,39 @@ enum totem_layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     //  ┌─────────────────────────────────────────────────┐
-    /*  │*/ [_QWERTY] = LAYOUT(                         //│           ╭╮╭╮ ╭╮╭╮
+    /*  │*/ [_US] = LAYOUT(                             //│           ╭╮╭╮ ╭╮╭╮
     //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
     //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
     //            │     Q    │     W    │     E    │     R    │     T    │ │     Y    │     U    │     I    │     O    │     P    │
-    /*    ╌┄┈┈──═*/   KC_Q   ,   KC_W   ,   KC_E   ,   KC_R   ,   KC_T    ,    KC_Y   ,   KC_U   ,   KC_I   ,   KC_O   ,   KC_P   ,
+    /*    ╌┄┈┈──═*/   US_Q   ,   US_W   ,   US_E   ,   US_R   ,   US_T    ,    US_Y   ,   US_U   ,   US_I   ,   US_O   ,   US_P   ,
     //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
     //            │     A    │     S    │     D    │     F    │     G    │ │     H    │     J    │     K    │     L    │    ; :   │
-    /*           */   KC_A   ,   CTL_S  ,   ALT_D  ,   SHT_F  ,   KC_G    ,    KC_H   ,   SHT_J  ,   ALT_K  ,   CTL_L  ,  KC_SCLN ,
+    /*           */   US_A   ,   CTL_S  ,   ALT_D  ,   SHT_F  ,   US_G    ,    US_H   ,   SHT_J  ,   ALT_K  ,   CTL_L  ,  KC_SCLN ,
     //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-    // │    ESC   │     Z    │     X    │     C    │     V    │     B    │ │     N    │     M    │     ,    │     .    │     /    │    GUI   │
-    /**/  KC_ESC  ,   KC_Z   ,   KC_X   ,   KC_C   ,   KC_V   ,   KC_B    ,    KC_N   ,   KC_M   ,  KC_COMM ,  KC_DOT  ,  KC_SLSH , KC_RGUI  ,
+    // │  DF RUS  │     Z    │     X    │     C    │     V    │     B    │ │     N    │     M    │     ,    │     .    │     /    │    GUI   │
+    /**/    RUS   ,   US_Z   ,   US_X   ,   US_C   ,   US_V   ,   US_B    ,    US_N   ,   US_M   ,  KC_COMM ,  KC_DOT  ,  KC_SLSH , KC_RGUI  ,
+    // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
+    //                                  │    DEL   │    TAB   │  SPACE   │ │  ENTER   │    ESC   │ BACKSPACE│
+    /*                                 */  KC_DEL  ,   LOWER  ,  KC_SPC   ,   KC_ENT  ,   RAISE  , KC_BSPC  ),
+    //                                  │          │ MC LOWER │          │ │          │ MC RAISE │          │
+    //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
+
+    //  ┌─────────────────────────────────────────────────┐
+    /*  │*/ [_RUS] = LAYOUT(                            //│           ╭╮╭╮ ╭╮╭╮
+    //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
+    //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
+    //            │     Э    │     Ц    │     У    │     К    │     Е    │ │     Н    │     Г    │     Ш    │     З    │     Х    │
+    /*    ╌┄┈┈──═*/   RU_E   ,  RU_TSE  ,   RU_U   ,   RU_KA  , XXXXXXX   ,    RU_EN  ,  RU_GHE  , XXXXXXX  ,   RU_ZE  ,   RU_HA  ,
+    //            │          │          │          │          │     Ё    │ │          │          │     Щ    │          │          │
+    //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
+    //            │     Ф    │     Ы    │     В    │     А    │     П    │ │     Р    │     О    │     Л    │     Д    │     Ж    │
+    /*           */   RU_EF  ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,   RU_PE   ,    RU_ER  ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  RU_ZHE  ,
+    //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
+    // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
+    // │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     /    │    GUI   │
+    /**/    US    ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,  XXXXXXX  ,    RU_TE  ,  XXXXXXX ,   RU_BE  ,   RU_YU  ,  KC_SLSH , KC_RGUI  ,
+    // │          │          │          │          │          │     Й    │ │          │     Ъ    │          │          │          │    GUI   │
     // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
     //                                  │    DEL   │    TAB   │  SPACE   │ │  ENTER   │    ESC   │ BACKSPACE│
     /*                                 */  KC_DEL  ,   LOWER  ,  KC_SPC   ,   KC_ENT  ,   RAISE  , KC_BSPC  ),
