@@ -25,11 +25,20 @@
 // └─────────────────────────────────────────────────┘
 
 enum totem_layers {
-    _US,
+    _USA = 0,
     _RUS,
     _LOWER,
     _RAISE,
     _ADJUST,
+};
+
+// ┌─────────────────────────────────────────────────┐
+// │ d e f i n e   k e y c o d e s                   │
+// └─────────────────────────────────────────────────┘
+
+enum custom_keycodes {
+    SET_USA = SAFE_RANGE,
+    SET_RUS
 };
 
 // ┌─────────────────────────────────────────────────┐
@@ -60,8 +69,6 @@ enum totem_layers {
 #define ALT_P5 MT(MOD_RALT, KC_P5)
 #define CTL_P6 MT(MOD_RCTL, KC_P6)
 
-#define US DF(_US)
-#define RUS DF(_RUS)
 #define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ESC)
 #define ADJUST MO(_ADJUST)
@@ -74,7 +81,7 @@ enum totem_layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     //  ┌─────────────────────────────────────────────────┐
-    /*  │*/ [_US] = LAYOUT(                             //│           ╭╮╭╮ ╭╮╭╮
+    /*  │*/ [_USA] = LAYOUT(                            //│           ╭╮╭╮ ╭╮╭╮
     //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
     //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
     //            │     Q    │     W    │     E    │     R    │     T    │ │     Y    │     U    │     I    │     O    │     P    │
@@ -85,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
     // │  DF RUS  │     Z    │     X    │     C    │     V    │     B    │ │     N    │     M    │     ,    │     .    │     /    │    GUI   │
-    /**/    RUS   ,   US_Z   ,   US_X   ,   US_C   ,   US_V   ,   US_B    ,    US_N   ,   US_M   ,  KC_COMM ,  KC_DOT  ,  KC_SLSH , KC_RGUI  ,
+    /**/  SET_RUS ,   US_Z   ,   US_X   ,   US_C   ,   US_V   ,   US_B    ,    US_N   ,   US_M   ,  KC_COMM ,  KC_DOT  ,  KC_SLSH , KC_RGUI  ,
     // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
     //                                  │    DEL   │    TAB   │  SPACE   │ │  ENTER   │    ESC   │ BACKSPACE│
     /*                                 */  KC_DEL  ,   LOWER  ,  KC_SPC   ,   KC_ENT  ,   RAISE  , KC_BSPC  ),
@@ -105,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
     // │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     /    │    GUI   │
-    /**/    US    ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,  XXXXXXX  ,    RU_TE  ,  XXXXXXX ,   RU_BE  ,   RU_YU  ,  KC_SLSH , KC_RGUI  ,
+    /**/  SET_USA ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,  XXXXXXX  ,    RU_TE  ,  XXXXXXX ,   RU_BE  ,   RU_YU  ,  KC_SLSH , KC_RGUI  ,
     // │          │          │          │          │          │     Й    │ │          │     Ъ    │          │          │          │    GUI   │
     // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
     //                                  │    DEL   │    TAB   │  SPACE   │ │  ENTER   │    ESC   │ BACKSPACE│
@@ -169,6 +176,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
         // ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
         KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, RALT(KC_U), RALT(KC_3), KC_BSLS, RALT(KC_A), RALT(KC_F), RALT(KC_S), RALT(KC_G), XXXXXXX, XXXXXXX, LSFT(RALT(KC_4)), RALT(KC_5), RALT(KC_4), RALT(KC_O), XXXXXXX, LSFT(KC_GRV), KC_TILD, RALT(KC_C), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DM_REC1, DM_RSTP, DM_PLY1, _______, ADJUST, _______, _______, _______, _______),
+};
+
+// ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+// │ M A C R O S                                                                                                            │
+// └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (record->event.pressed) {
+        switch (keycode) {
+            case SET_USA:
+                // 1. Переключаем слой в клавиатуре
+                set_single_persistent_default_layer(_USA);
+                // 2. Посылаем хоткей в ОС для выбора EN
+                tap_code16(LCTL(LSFT(KC_1)));
+                return false;
+
+            case SET_RUS:
+                // 1. Переключаем слой в клавиатуре
+                set_single_persistent_default_layer(_RUS);
+                // 2. Посылаем хоткей в ОС для выбора RU
+                tap_code16(LCTL(LSFT(KC_2)));
+                return false;
+        }
+    }
+    return true;
 };
 
 /*
