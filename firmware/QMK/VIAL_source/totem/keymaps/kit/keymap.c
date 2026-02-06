@@ -27,9 +27,9 @@
 enum totem_layers {
     _USA = 0,
     _RUS,
-    _LOWER,
-    _RAISE,
-    _ADJUST,
+    _SPECIAL,
+    _NAVIGATE,
+    _NUMBER,
 };
 
 // ┌─────────────────────────────────────────────────┐
@@ -39,40 +39,101 @@ enum totem_layers {
 enum custom_keycodes {
     SET_USA = SAFE_RANGE,
     SET_RUS,
-    CH_DOT
+    CH_DOT,   /* . */
+    CH_COMM,  /* , */
+    CH_COLN,  /* : */
+    CH_SCLN,  /* ; */
+    CH_LCBR,  /* { */
+    CH_RCBR,  /* } */
+    CH_LBRC,  /* [ */
+    CH_RBRC,  /* ] */
+    CH_LPRN,  /* ( */
+    CH_RPRN,  /* ) */
+    CH_LABK,  /* < */
+    CH_RABK,  /* > */
+    CH_QUOT,  /* ' */
+    CH_DQUO,  /* " */
+    CH_SLSH,  /* / */
+    CH_BSLS,  /* \ */
+    CH_PIPE,  /* | */
+    CH_GRV,   /* ` */
+    CH_TILD,  /* ~ */
+    CH_UNDS,  /* _ */
+    CH_HASH,  /* # */
+    CH_AT,    /* @ */
+    CH_AMPR,  /* & */
+    CH_DLR,   /* $ */
+    CH_EXLM,  /* ! */
+    CH_QUES,  /* ? */
+    CH_NUM,   /* № */
+    CH_PERC   /* % */
 };
 
 // ┌─────────────────────────────────────────────────┐
 // │ d e f i n e   m a c r o n a m e s               │
 // └─────────────────────────────────────────────────┘
 
-// LEFT HAND HOME ROW MODS QWERTY ├──────────────────┐
+// ┌── SWITCH LANGUAGE ────────────────────────────────────────────────────────────────────────────────────────────────┐
+/* │*/ #define SWITCH_USA LCTL(LSFT(KC_1))                                                                          // │
+/* │*/ #define SWITCH_RUS LCTL(LSFT(KC_2))                                                                          // │
+// └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+// MODS USA                         ├──────────────────┐
+// LEFT HAND HOME ROW                   ├──────────────────┐
 
 #define CTL_S MT(MOD_LCTL, US_S)
 #define ALT_D MT(MOD_LALT, US_D)
 #define SHT_F MT(MOD_LSFT, US_F)
 
-// RIGHT HAND HOME ROW MODS QWERTY ├─────────────────┐
+// RIGHT HAND HOME ROW                  ├─────────────────┐
 
 #define SHT_J MT(MOD_RSFT, US_J)
 #define ALT_K MT(MOD_RALT, US_K)
 #define CTL_L MT(MOD_RCTL, US_L)
 
-// LEFT HAND HOME ROW MODS LOWER ├──────────────────┐
+// MODS RUS                         ├──────────────────┐
+// LEFT HAND HOME ROW                   ├──────────────────┐
+#define IE_YO MT(RU_YO, RU_IE)
+#define SHTI_I MT(RU_SHTI, RU_I)
+#define SHA_YERU MT(MOD_LCTL, RU_YERU)
+#define ALT_VE MT(MOD_LALT, RU_VE)
+#define SHT_A MT(MOD_LSFT, RU_A)
+
+// RIGHT HAND HOME ROW                  ├──────────────────┐
+#define SHA_SHCH MT(RU_SHA, RU_SHCH)
+#define HARD_SOFT MT(RU_HARD, RU_SOFT)
+#define SHT_O MT(MOD_RSFT, RU_O)
+#define ALT_EL MT(MOD_RALT, RU_EL)
+#define CTL_DE MT(MOD_RCTL, RU_DE)
+
+// MODS NUMBER                        ├──────────────────┐
+// LEFT HAND HOME ROW                    ├──────────────────┐
+#define CTL_F6 MT(MOD_LCTL, KC_F6)
+#define ALT_F7 MT(MOD_LALT, KC_F7)
+#define SHT_F8 MT(MOD_LSFT, KC_F8)
+
+// RIGHT HAND HOME ROW               ├─────────────────┐
+#define SHT_P4 MT(MOD_RSFT, KC_P4)
+#define ALT_P5 MT(MOD_RALT, KC_P5)
+#define CTL_P6 MT(MOD_RCTL, KC_P6)
+
+// MODS NAVIGATE                        ├──────────────────┐
+// LEFT HAND HOME ROW                    ├──────────────────┐
 
 #define CTL_LEFT MT(MOD_LCTL, KC_LEFT)
 #define ALT_DOWN MT(MOD_LALT, KC_DOWN)
 #define SHT_RGHT MT(MOD_LSFT, KC_RGHT)
 
-// RIGHT HAND HOME ROW MODS LOWER ├─────────────────┐
+// RIGHT HAND HOME ROW               ├─────────────────┐
 
-#define SHT_P4 MT(MOD_RSFT, KC_P4)
-#define ALT_P5 MT(MOD_RALT, KC_P5)
-#define CTL_P6 MT(MOD_RCTL, KC_P6)
+#define SHT_HOME MT(MOD_RSFT, KC_HOME)
+#define ALT_PGDN MT(MOD_RALT, KC_PGDN)
+#define CTL_END MT(MOD_RCTL, KC_END)
 
-#define LOWER LT(_LOWER, KC_TAB)
-#define RAISE LT(_RAISE, KC_ESC)
-#define ADJUST MO(_ADJUST)
+#define SPECIAL LT(_SPECIAL, KC_TAB)
+#define NUMBER LT(_NUMBER, KC_ESC)
+#define NAV_ESC LT(_NAVIGATE, KC_ESC)
+#define NAV_TAB LT(_NAVIGATE, KC_TAB)
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ K E Y M A P S                                                                                                     │
@@ -88,95 +149,97 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //            │     Q    │     W    │     E    │     R    │     T    │ │     Y    │     U    │     I    │     O    │     P    │
     /*    ╌┄┈┈──═*/   US_Q   ,   US_W   ,   US_E   ,   US_R   ,   US_T    ,    US_Y   ,   US_U   ,   US_I   ,   US_O   ,   US_P   ,
     //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
-    //            │     A    │     S    │     D    │     F    │     G    │ │     H    │     J    │     K    │     L    │    ; :   │
-    /*           */   US_A   ,   CTL_S  ,   ALT_D  ,   SHT_F  ,   US_G    ,    US_H   ,   SHT_J  ,   ALT_K  ,   CTL_L  ,  KC_SCLN ,
+    //            │     A    │     S    │     D    │     F    │     G    │ │     H    │     J    │     K    │     L    │          │
+    /*           */   US_A   ,   CTL_S  ,   ALT_D  ,   SHT_F  ,   US_G    ,    US_H   ,   SHT_J  ,   ALT_K  ,   CTL_L  ,  XXXXXXX ,
     //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-    // │  DF RUS  │     Z    │     X    │     C    │     V    │     B    │ │     N    │     M    │     ,    │     .    │     /    │    GUI   │
-    /**/  SET_RUS ,   US_Z   ,   US_X   ,   US_C   ,   US_V   ,   US_B    ,    US_N   ,   US_M   ,  KC_COMM ,  KC_DOT  ,  KC_SLSH , KC_RGUI  ,
+    // │    RUS   │     Z    │     X    │     C    │     V    │     B    │ │     N    │     M    │          │          │          │    GUI   │
+    /**/  SET_RUS ,   US_Z   ,   US_X   ,   US_C   ,   US_V   ,   US_B    ,    US_N   ,   US_M   ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX , KC_RGUI  ,
     // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
-    //                                  │    DEL   │    TAB   │  SPACE   │ │  ENTER   │    ESC   │ BACKSPACE│
-    /*                                 */  KC_DEL  ,   LOWER  ,  KC_SPC   ,   KC_ENT  ,   RAISE  , KC_BSPC  ),
-    //                                  │          │ MC LOWER │          │ │          │ MC RAISE │          │
+    //                                  │    DEL   │    TAB   │   SPACE  │ │  ENTER   │    ESC   │ BACKSPACE│
+    /*                                 */  KC_DEL  ,  SPECIAL ,  KC_SPC   ,   KC_ENT  ,  NUMBER  , KC_BSPC  ),
+    //                                  │          │  SPECIAL │          │ │          │  NUMBER  │          │
     //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
 
     //  ┌─────────────────────────────────────────────────┐
     /*  │*/ [_RUS] = LAYOUT(                            //│           ╭╮╭╮ ╭╮╭╮
     //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
     //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
-    //            │     Э    │     Ц    │     У    │     К    │     Е    │ │     Н    │     Г    │     Ш    │     З    │     Х    │
-    /*    ╌┄┈┈──═*/   RU_E   ,  RU_TSE  ,   RU_U   ,   RU_KA  , XXXXXXX   ,    RU_EN  ,  RU_GHE  , XXXXXXX  ,   RU_ZE  ,   RU_HA  ,
+    //            │          │     Ц    │     У    │     К    │     Е    │ │     Н    │     Г    │     Ш    │     З    │     Х    │
+    /*    ╌┄┈┈──═*/ XXXXXXX  ,  RU_TSE  ,   RU_U   ,   RU_KA  ,   IE_YO  ,    RU_EN  ,  RU_GHE   , SHA_SHCH ,   RU_ZE  ,   RU_HA  ,
     //            │          │          │          │          │     Ё    │ │          │          │     Щ    │          │          │
     //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
     //            │     Ф    │     Ы    │     В    │     А    │     П    │ │     Р    │     О    │     Л    │     Д    │     Ж    │
-    /*           */   RU_EF  ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,   RU_PE   ,    RU_ER  ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  RU_ZHE  ,
+    /*           */   RU_EF  , SHA_YERU ,  ALT_VE  ,   SHT_A  ,   RU_PE   ,    RU_ER  ,   SHT_O  ,  ALT_EL  ,  CTL_DE  ,  RU_ZHE  ,
     //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-    // │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     /    │    GUI   │
-    /**/  SET_USA ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,  XXXXXXX  ,    RU_TE  ,  XXXXXXX ,   RU_BE  ,   RU_YU  ,  KC_SLSH , KC_RGUI  ,
-    // │          │          │          │          │          │     Й    │ │          │     Ъ    │          │          │          │    GUI   │
+    // │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     Э    │    GUI   │
+    /**/  SET_USA ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,  SHTI_I   ,    RU_TE  , HARD_SOFT,   RU_BE  ,   RU_YU  ,   RU_E   , KC_RGUI  ,
+    // │          │          │          │          │          │     Й    │ │          │     Ъ    │          │          │          │          │
     // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
-    //                                  │    DEL   │    TAB   │  SPACE   │ │  ENTER   │    ESC   │ BACKSPACE│
-    /*                                 */  KC_DEL  ,   LOWER  ,  KC_SPC   ,   KC_ENT  ,   RAISE  , KC_BSPC  ),
-    //                                  │          │ MC LOWER │          │ │          │ MC RAISE │          │
+    //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
+    /*                                 */  KC_DEL  ,  SPECIAL ,  KC_SPC   ,   KC_ENT  ,  NUMBER  , KC_BSPC  ),
+    //                                  │          │  SPECIAL │          │ │          │  NUMBER  │          │
+    //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
+
+    //
+
+    //  ┌─────────────────────────────────────────────────┐
+    /*  │*/ [_SPECIAL] = LAYOUT(                        //│           ╭╮╭╮ ╭╮╭╮
+    //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
+    //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
+    //            │     `    │     ~    │     _    │     <    │     {    │ │     }    │     >    │          │     |    │     #    │
+    /*    ╌┄┈┈──═*/  CH_GRV  ,  CH_TILD ,  CH_UNDS ,  CH_LABK ,  CH_LCBR  ,   CH_RCBR ,  CH_RABK ,  XXXXXXX ,  CH_PIPE ,  CH_HASH ,
+    //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
+    //            │          │          │     \    │     "    │     [    │ │     ]    │     '    │     /    │          │          │
+    /*           */  XXXXXXX ,  XXXXXXX ,  CH_BSLS , CH_DQUO  ,  CH_LBRC  ,   CH_RBRC ,  CH_QUOT ,  CH_SLSH ,  XXXXXXX ,  XXXXXXX ,
+    //            │          │   CTRL   │    ALT*? │   SHIFT* │          │ │          │   SHIFT* │    ALT   │   CTRL   │          │
+    // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
+    // │    @     │     &    │     $    │     ;    │     ,    │     (    │ │     )    │     .    │     :    │     !    │     ?    │     №    │
+    /**/  CH_AT   ,  CH_AMPR ,  CH_DLR  ,  CH_SCLN , CH_COMM  , CH_LPRN   ,   CH_RPRN ,  CH_DOT  ,  CH_COLN ,  CH_EXLM ,  CH_QUES ,  CH_NUM  ,
+    // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
+    //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
+    /*                                 */  _______ ,  _______ ,  _______  ,   _______ ,  NAV_ESC , _______  ),
+    //                                  │          │          │          │ │          │ NAVIGATE │          │
     //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
 
     //  ┌─────────────────────────────────────────────────┐
-    /*  │*/ [_LOWER] = LAYOUT(                          //│           ╭╮╭╮ ╭╮╭╮
+    /*  │*/ [_NUMBER] = LAYOUT(                         //│           ╭╮╭╮ ╭╮╭╮
     //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
     //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
-    //            │ CAPS LCK │  NUMLCK  │     ↑    │     =    │     {    │ │     }    │     7    │     8    │     9    │     +    │
-    /*    ╌┄┈┈──═*/  KC_CAPS ,  KC_NUM  ,   KC_UP  ,  KC_EQL  ,  KC_LCBR  ,   KC_RCBR ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  KC_PPLS ,
+    //            │    F9    │    F10   │    F11   │    F12   │          │ │     +    │     7    │     8    │     9    │     -    │
+    /*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  XXXXXXX  ,   KC_PPLS ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  KC_MINS ,
     //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
-    //            │   PG UP  │     ←    │     ↓    │     →    │     [    │ │     ]    │     4    │     5    │     6    │     -    │
-    /*           */ KC_PGUP  , CTL_LEFT , ALT_DOWN , SHT_RGHT , KC_LBRC   ,   KC_RBRC ,  SHT_P4  ,  ALT_P5  ,  CTL_P6  ,  KC_MINS ,
+    //            │    F5    │    F6    │    F7    │    F8    │          │ │     *    │     4    │     5    │     6    │     /    │
+    /*           */   KC_F5  ,  CTL_F6  ,  ALT_F7  ,  SHT_F8  ,  XXXXXXX  ,   KC_PAST ,  SHT_P4  ,  ALT_P5  ,  CTL_P6  ,  CH_SLSH ,
     //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-    // │    ESC   │  PG DOWN │   HOME   │   SAVE   │   END    │     (    │ │     )    │     1    │     2    │     3    │     *    │    GUI   │
-    /**/ _______  ,  KC_PGDN ,  KC_QUOT ,  C(KC_S) ,  KC_END  , KC_LPRN   ,   KC_RPRN ,   KC_P1  ,   KC_P2  ,   KC_P3  ,  KC_PAST ,  _______ ,
+    // │          │    F1    │    F2    │    F3    │    F4    │          │ │     =    │     1    │     2    │     3    │     %    │          │
+    /**/  XXXXXXX ,   KC_F1  ,   KC_F2  ,   KC_F3  ,   KC_F4  ,  XXXXXXX  ,   KC_EQL  ,   KC_P1  ,   KC_P2  ,   KC_P3  ,  CH_PERC ,  XXXXXXX ,
     // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
-    //                                  │    DEL   │          │  SPACE   │ │  ENTER   │    ESC   │ BACKSPACE│
-    /*                                 */  _______ ,  _______ ,  _______  ,   _______ ,  ADJUST  , _______  ),
-    //                                  │          │          │          │ │          │ MC ADJUST│          │
+    //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
+    /*                                 */  _______ ,  NAV_TAB ,  _______  ,   _______ ,  _______ , _______  ),
+    //                                  │          │ NAVIGATE │          │ │          │          │          │
     //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
 
     //  ┌─────────────────────────────────────────────────┐
-    /*  │*/ [_RAISE] = LAYOUT(                          //│           ╭╮╭╮ ╭╮╭╮
+    /*  │*/ [_NAVIGATE] = LAYOUT(                       //│           ╭╮╭╮ ╭╮╭╮
     //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
     //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
-    //            │    F9    │    F10   │    F11   │    F12   │          │ │          │          │          │          │          │
-    /*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,
+    //            │ CAPS LCK │          │     ↑    │          │          │ │          │          │   PG UP  │          │  NUMLCK  │
+    /*    ╌┄┈┈──═*/  KC_CAPS ,  XXXXXXX ,   KC_UP  ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,  KC_PGUP ,  XXXXXXX ,  KC_NUM ,
     //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
-    //            │    F5    │    F6    │    F7    │    F8    │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
-    /*           */   KC_F5  ,   KC_F6  ,   KC_F7  ,   KC_F8  ,  XXXXXXX  ,   XXXXXXX ,  KC_RSFT ,  KC_RALT ,  KC_RCTL ,  XXXXXXX ,
+    //            │          │     ←    │     ↓    │     →    │          │ │          │   HOME   │  PG DOWN │    END   │          │
+    /*           */  XXXXXXX , CTL_LEFT , ALT_DOWN , SHT_RGHT ,  XXXXXXX  ,   XXXXXXX , SHT_HOME , ALT_PGDN ,  CTL_END ,  XXXXXXX ,
+    //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
     // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-    // │    ESC   │    F1    │    F2    │    F3    │    F4    │          │ │          │          │          │          │          │    GUI   │
-    /**/  _______ ,   KC_F1  ,   KC_F2  ,   KC_F3  ,   KC_F4  ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  _______ ,
+    // │          │          │          │          │          │          │ │          │          │          │          │          │          │
+    /**/  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX ,
     // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
-    //                                  │    DEL   │    TAB   │  SPACE   │ │  ENTER   │          │ BACKSPACE│
-    /*                                 */  _______ ,  ADJUST  , _______   ,  _______  , _______  , _______  ),
-    //                                  │          │ MC ADJUST│          │ │          │          │          │
+    //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
+    /*                                 */  _______ ,  _______ ,  _______  ,   _______ ,  _______ , _______  ),
+    //                                  │          │          │          │ │          │          │          │
     //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
-
-    /*
-      ╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸
-
-      ┌─────────────────────────────────────────────────┐
-      │ A D J U S T                                     │      ╭╮╭╮╭╮╭╮
-      └─────────────────────────────────────────────────┘      │╰╯╰╯╰╯│
-                ┌─────────┬─────────┬─────────┬─────────┬──────╨──┐┌──╨──────┬─────────┬─────────┬─────────┬─────────┐
-        ╌┄┈┈───═╡    !    │    @    │    #    │    $    │    %    ││    ^    │    &    │    Ü    │    °    │    /    │
-                ├─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┤
-                │    Ä    │    è    │    SZ   │    é    │         ││         │    ¥    │    €    │    £    │    Ö    │
-      ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-      │         │    `    │    ~    │   CUE   │         │         ││         │         │         │ DM REC1 │ DM STOP │ DM PLY1 │
-      └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                    │  GIPHY  │ ADJUST  │    ▼    ││    ▼    │    ▼    │    ▼    │
-                                    └─────────┴─────────┴─────────┘└─────────┴─────────┴─────────┘ */
-
-    [_ADJUST] = LAYOUT(
-        // ╷         ╷         ╷         ╷         ╷         ╷         ╷╷         ╷         ╷         ╷         ╷         ╷         ╷
-        KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, RALT(KC_U), RALT(KC_3), KC_BSLS, RALT(KC_A), RALT(KC_F), RALT(KC_S), RALT(KC_G), XXXXXXX, XXXXXXX, LSFT(RALT(KC_4)), RALT(KC_5), RALT(KC_4), RALT(KC_O), XXXXXXX, LSFT(KC_GRV), KC_TILD, RALT(KC_C), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DM_REC1, DM_RSTP, DM_PLY1, _______, ADJUST, _______, _______, _______, _______),
 };
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -191,6 +254,28 @@ void send_symbol(uint16_t usa_code, uint16_t rus_code) {
   }
 }
 
+void send_usa_symbol(uint16_t usa_code) {
+  switch (get_highest_layer(default_layer_state)) {
+    case _USA: tap_code16(usa_code); break;
+    case _RUS:
+        tap_code16(SWITCH_USA);
+        tap_code16(usa_code);
+        tap_code16(SWITCH_RUS);
+        break;
+  }
+}
+
+void send_rus_symbol(uint16_t rus_code) {
+  switch (get_highest_layer(default_layer_state)) {
+    case _USA:
+        tap_code16(SWITCH_RUS);
+        tap_code16(rus_code);
+        tap_code16(SWITCH_USA);
+        break;
+    case _RUS: tap_code16(rus_code); break;
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
@@ -199,16 +284,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
             case SET_USA:
                 set_single_persistent_default_layer(_USA);
-                tap_code16(LCTL(LSFT(KC_1)));
+                tap_code16(SWITCH_USA);
                 return false;
             case SET_RUS:
                 set_single_persistent_default_layer(_RUS);
-                tap_code16(LCTL(LSFT(KC_2)));
+                tap_code16(SWITCH_RUS);
                 return false;
             // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
             // │ C U S T O M  K E Y S                                                                                  │
             // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
             case CH_DOT: send_symbol(US_DOT, RU_DOT); return false;
+            case CH_COMM: send_symbol(US_COMM, RU_COMM); return false;
+            case CH_COLN: send_symbol(US_COLN, RU_COLN); return false;
+            case CH_SCLN: send_symbol(US_SCLN, RU_SCLN); return false;
+            case CH_DQUO: send_symbol(US_DQUO, RU_DQUO); return false;
+            case CH_SLSH: send_symbol(US_SLSH, RU_SLSH); return false;
+            case CH_BSLS: send_symbol(US_BSLS, RU_BSLS); return false;
+            case CH_UNDS: send_symbol(US_UNDS, RU_UNDS); return false;
+            case CH_LPRN: send_symbol(US_LPRN, RU_LPRN); return false;
+            case CH_RPRN: send_symbol(US_RPRN, RU_RPRN); return false;
+            case CH_EXLM: send_symbol(US_EXLM, RU_EXLM); return false;
+            case CH_QUES: send_symbol(US_QUES, RU_QUES); return false;
+            case CH_PERC: send_symbol(US_PERC, RU_PERC); return false;
+            case CH_QUOT: send_usa_symbol(US_QUOT); return false;
+            case CH_LCBR: send_usa_symbol(US_LCBR); return false;
+            case CH_RCBR: send_usa_symbol(US_RCBR); return false;
+            case CH_LBRC: send_usa_symbol(US_LBRC); return false;
+            case CH_RBRC: send_usa_symbol(US_RBRC); return false;
+            case CH_LABK: send_usa_symbol(US_LABK); return false;
+            case CH_RABK: send_usa_symbol(US_RABK); return false;
+            case CH_GRV: send_usa_symbol(US_GRV); return false;
+            case CH_TILD: send_usa_symbol(US_TILD); return false;
+            case CH_PIPE: send_usa_symbol(US_PIPE); return false;
+            case CH_HASH: send_usa_symbol(US_HASH); return false;
+            case CH_AT: send_usa_symbol(US_AT); return false;
+            case CH_AMPR: send_usa_symbol(US_AMPR); return false;
+            case CH_DLR: send_usa_symbol(US_DLR); return false;
+            case CH_NUM: send_rus_symbol(RU_NUM); return false;
         }
     }
     return true;
