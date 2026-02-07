@@ -293,7 +293,9 @@ void send_usa_symbol(uint16_t usa_code) {
     case _USA: tap_code16(usa_code); break;
     case _RUS:
         tap_code16(SWITCH_USA);
+        wait_ms(25);
         tap_code16(usa_code);
+        wait_ms(10);
         tap_code16(SWITCH_RUS);
         break;
   }
@@ -303,7 +305,9 @@ void send_rus_symbol(uint16_t rus_code) {
   switch (get_highest_layer(default_layer_state)) {
     case _USA:
         tap_code16(SWITCH_RUS);
+        wait_ms(25);
         tap_code16(rus_code);
+        wait_ms(10);
         tap_code16(SWITCH_USA);
         break;
     case _RUS: tap_code16(rus_code); break;
