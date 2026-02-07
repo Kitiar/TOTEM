@@ -96,10 +96,10 @@ enum {
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 // ┌── SWITCH MACRO NAMES ─────────────────────────────────────────────────────────────────────────────────────────────┐
-/* │*/ #define SPECIAL LT(_SPECIAL, KC_TAB)                                                                         // │
-/* │*/ #define NUMBER  LT(_NUMBER, KC_ESC)                                                                          // │
-/* │*/ #define NAV_ESC LT(_NAVIGATE, KC_ESC)                                                                        // │
-/* │*/ #define NAV_TAB LT(_NAVIGATE, KC_TAB)                                                                        // │
+/* │*/ #define SPEC_TAB LT(_SPECIAL, KC_TAB)                                                                         // │
+/* │*/ #define NUM_ESC  LT(_NUMBER, KC_ESC)                                                                          // │
+/* │*/ #define NAV_ESC  LT(_NAVIGATE, KC_ESC)                                                                        // │
+/* │*/ #define NAV_TAB  LT(_NAVIGATE, KC_TAB)                                                                        // │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 // ┌── USA LAYER MACRO NAMES ──────────────────────────────────────────────────────────────────────────────────────────┐
@@ -205,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /**/  SET_RUS ,   US_Z   ,   US_X   ,   US_C   ,   US_V   ,   US_B    ,    US_N   ,   US_M   ,  XXXXXXX ,  XXXXXXX ,  XXXXXXX , KC_RGUI  ,
 // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
 //                                  │    DEL   │    TAB   │   SPACE  │ │  ENTER   │    ESC   │ BACKSPACE│
-/*                                 */  KC_DEL  ,  SPECIAL ,  KC_SPC   ,   KC_ENT  ,  NUMBER  , KC_BSPC  ),
+/*                                 */  KC_DEL  , SPEC_TAB ,  KC_SPC   ,   KC_ENT  ,  NUM_ESC , KC_BSPC  ),
 //                                  │          │  SPECIAL │          │ │          │  NUMBER  │          │
 //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
 
@@ -226,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // │          │          │          │          │          │     Й    │ │          │     Ъ    │          │          │          │          │
 // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
 //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
-/*                                 */  KC_DEL  ,  SPECIAL ,  KC_SPC   ,   KC_ENT  ,  NUMBER  , KC_BSPC  ),
+/*                                 */  KC_DEL  , SPEC_TAB ,  KC_SPC   ,   KC_ENT  ,  NUM_ESC , KC_BSPC  ),
 //                                  │          │  SPECIAL │          │ │          │  NUMBER  │          │
 //                                  └──────────┴──────────┴──────────┘ └──────────┴──────────┴──────────┘
 
