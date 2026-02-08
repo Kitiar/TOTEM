@@ -75,8 +75,6 @@ enum custom_keycodes {
 enum {
     TD_IE_YO = 0, /* Е / Ё */
     TD_SHA_SHCH,  /* Ш / Щ */
-    TD_SHTI_I,    /* И / Й */
-    TD_HARD_SOFT  /* Ь / Ъ */
 };
 
 // ┌─────────────────────────────────────────────────┐
@@ -96,10 +94,10 @@ enum {
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 // ┌── SWITCH MACRO NAMES ─────────────────────────────────────────────────────────────────────────────────────────────┐
-/* │*/ #define SPEC_TAB LT(_SPECIAL, KC_TAB)                                                                         // │
-/* │*/ #define NUM_ESC  LT(_NUMBER, KC_ESC)                                                                          // │
-/* │*/ #define NAV_ESC  LT(_NAVIGATE, KC_ESC)                                                                        // │
-/* │*/ #define NAV_TAB  LT(_NAVIGATE, KC_TAB)                                                                        // │
+/* │*/ #define SPEC_TAB LT(_SPECIAL,  KC_TAB)                                                                       // │
+/* │*/ #define NUM_ESC  LT(_NUMBER,   KC_ESC)                                                                       // │
+/* │*/ #define NAV_ESC  LT(_NAVIGATE, KC_ESC)                                                                       // │
+/* │*/ #define NAV_TAB  LT(_NAVIGATE, KC_TAB)                                                                       // │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 // ┌── USA LAYER MACRO NAMES ──────────────────────────────────────────────────────────────────────────────────────────┐
@@ -118,14 +116,12 @@ enum {
 // ┌── RUS LAYER MACRO NAMES ──────────────────────────────────────────────────────────────────────────────────────────┐
 // │┌── LEFT HAND ────────────────────────────────────────────────────────────────────────────────────────────────────┐│
 /* ││*/ #define IE_YO       TD(TD_IE_YO)                                                                           // ││
-/* ││*/ #define SHTI_I      TD(TD_SHTI_I)                                                                          // ││
 /* ││*/ #define SHA_YERU    MT(MOD_LCTL, RU_YERU)                                                                  // ││
 /* ││*/ #define ALT_VE      MT(MOD_LALT, RU_VE)                                                                    // ││
 /* ││*/ #define SHT_A       MT(MOD_LSFT, RU_A)                                                                     // ││
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // │┌── RIGHT HAND ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
 /* ││*/ #define SHA_SHCH    TD(TD_SHA_SHCH)                                                                        // ││
-/* ││*/ #define HARD_SOFT   TD(TD_HARD_SOFT)                                                                       // ││
 /* ││*/ #define SHT_O       MT(MOD_RSFT, RU_O)                                                                     // ││
 /* ││*/ #define ALT_EL      MT(MOD_RALT, RU_EL)                                                                    // ││
 /* ││*/ #define CTL_DE      MT(MOD_RCTL, RU_DE)                                                                    // ││
@@ -166,8 +162,6 @@ enum {
 tap_dance_action_t tap_dance_actions[] = {
     [TD_IE_YO] = ACTION_TAP_DANCE_DOUBLE(RU_IE, RU_YO),
     [TD_SHA_SHCH] = ACTION_TAP_DANCE_DOUBLE(RU_SHA, RU_SHCH),
-    [TD_SHTI_I] = ACTION_TAP_DANCE_DOUBLE(RU_I, RU_SHTI),
-    [TD_HARD_SOFT] = ACTION_TAP_DANCE_DOUBLE(RU_SOFT, RU_HARD),
 };
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -200,17 +194,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*  │*/ [_RUS] = LAYOUT(                            //│           ╭╮╭╮ ╭╮╭╮
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
-//            │          │     Ц    │     У    │     К    │     Е    │ │     Н    │     Г    │     Ш    │     З    │     Х    │
-/*    ╌┄┈┈──═*/ XXXXXXX  ,  RU_TSE  ,   RU_U   ,   RU_KA  ,   IE_YO  ,    RU_EN  ,  RU_GHE   , SHA_SHCH ,   RU_ZE  ,   RU_HA  ,
+//            │     Й    │     Ц    │     У    │     К    │     Е    │ │     Н    │     Г    │     Ш    │     З    │     Х    │
+/*    ╌┄┈┈──═*/  RU_SHTI ,  RU_TSE  ,   RU_U   ,   RU_KA  ,   IE_YO  ,    RU_EN  ,  RU_GHE   , SHA_SHCH ,   RU_ZE  ,   RU_HA  ,
 //            │          │          │          │          │     Ё    │ │          │          │     Щ    │          │          │
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │     Ф    │     Ы    │     В    │     А    │     П    │ │     Р    │     О    │     Л    │     Д    │     Ж    │
 /*           */   RU_EF  , SHA_YERU ,  ALT_VE  ,   SHT_A  ,   RU_PE   ,    RU_ER  ,   SHT_O  ,  ALT_EL  ,  CTL_DE  ,  RU_ZHE  ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-// │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     Э    │    GUI   │
-/**/  SET_USA ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,  SHTI_I   ,    RU_TE  , HARD_SOFT,   RU_BE  ,   RU_YU  ,   RU_E   , KC_RGUI  ,
-// │          │          │          │          │          │     Й    │ │          │     Ъ    │          │          │          │          │
+// │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     Ъ    │     Э    │
+/**/  SET_USA ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,   RU_I   ,    RU_TE  ,   RU_SOFT ,   RU_BE  ,   RU_YU  ,  RU_HARD ,   RU_E   ,
 // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
 //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
 /*                                 */  KC_DEL  , SPEC_TAB ,  KC_SPC   ,   KC_ENT  ,  NUM_ESC , KC_BSPC  ),
