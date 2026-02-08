@@ -25,11 +25,11 @@
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 enum totem_layers {
-    _USA = 0,
-    _RUS,
-    _SPECIAL,
-    _NAVIGATE,
-    _NUMBER,
+    _USA = 0,  // 0 nested layer
+    _RUS,      // 0 nested layer
+    _SPECIAL,  // 1 nested layer
+    _NUMBER,   // 1 nested layer
+    _NAVIGATE, // 2 nested layer
 };
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -239,8 +239,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*           */   KC_F5  ,  CTL_F6  ,  ALT_F7  ,  SHT_F8  ,  XXXXXXX  ,   KC_PAST ,  SHT_P4  ,  ALT_P5  ,  CTL_P6  ,  CH_SLSH ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-// │          │    F1    │    F2    │    F3    │    F4    │          │ │     =    │     1    │     2    │     3    │     %    │          │
-/**/  XXXXXXX ,   KC_F1  ,   KC_F2  ,   KC_F3  ,   KC_F4  ,  XXXXXXX  ,   KC_EQL  ,   KC_P1  ,   KC_P2  ,   KC_P3  ,  CH_PERC ,  XXXXXXX ,
+// │          │    F1    │    F2    │    F3    │    F4    │          │ │     0    │     1    │     2    │     3    │     =    │     %    │
+/**/  XXXXXXX ,   KC_F1  ,   KC_F2  ,   KC_F3  ,   KC_F4  ,  XXXXXXX  ,    KC_P0  ,   KC_P1  ,   KC_P2  ,   KC_P3  ,  KC_EQL  ,  CH_PERC ,
 // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
 //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
 /*                                 */  _______ ,  NAV_TAB ,  _______  ,   _______ ,  _______ , _______  ),
