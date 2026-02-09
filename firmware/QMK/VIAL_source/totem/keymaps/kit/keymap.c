@@ -252,8 +252,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*  │*/ [_NAVIGATE] = LAYOUT(                       //│           ╭╮╭╮ ╭╮╭╮
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
-//            │ CAPS LCK │          │     ↑    │          │          │ │          │          │   PG UP  │          │  NUMLCK  │
-/*    ╌┄┈┈──═*/  KC_CAPS ,  XXXXXXX ,   KC_UP  ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,  KC_PGUP ,  XXXXXXX ,  KC_NUM ,
+//            │ CAPS LCK │ PRIN SCR │     ↑    │          │          │ │          │          │   PG UP  │  INSERT  │  NUMLCK  │
+/*    ╌┄┈┈──═*/  KC_CAPS ,  KC_PSCR ,   KC_UP  ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,  KC_PGUP ,  KC_INS  ,  KC_NUM ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │          │     ←    │     ↓    │     →    │          │ │          │   HOME   │  PG DOWN │    END   │          │
 /*           */  XXXXXXX , CTL_LEFT , ALT_DOWN , SHT_RGHT ,  XXXXXXX  ,   XXXXXXX , SHT_HOME , ALT_PGDN ,  CTL_END ,  XXXXXXX ,
