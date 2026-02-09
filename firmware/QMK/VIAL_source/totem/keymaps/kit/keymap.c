@@ -144,14 +144,14 @@ enum {
 
 // ┌── NAVIGATE LAYER MACRO NAMES ─────────────────────────────────────────────────────────────────────────────────────┐
 // │┌── LEFT HAND ────────────────────────────────────────────────────────────────────────────────────────────────────┐│
-/* ││*/ #define CTL_LEFT MT(MOD_LCTL, KC_LEFT)                                                                     // ││
-/* ││*/ #define ALT_DOWN MT(MOD_LALT, KC_DOWN)                                                                     // ││
-/* ││*/ #define SHT_RGHT MT(MOD_LSFT, KC_RGHT)                                                                     // ││
+/* ││*/ #define CTL_HOME MT(MOD_LCTL, KC_HOME)                                                                     // ││
+/* ││*/ #define ALT_PGDN MT(MOD_LALT, KC_PGDN)                                                                     // ││
+/* ││*/ #define SFT_END  MT(MOD_LSFT, KC_END)                                                                      // ││
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // │┌── RIGHT HAND ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
-/* ││*/ #define SHT_HOME MT(MOD_RSFT, KC_HOME)                                                                     // ││
-/* ││*/ #define ALT_PGDN MT(MOD_RALT, KC_PGDN)                                                                     // ││
-/* ││*/ #define CTL_END  MT(MOD_RCTL, KC_END)                                                                      // ││
+/* ││*/ #define SFT_LEFT MT(MOD_RSFT, KC_LEFT)                                                                     // ││
+/* ││*/ #define ALT_DOWN MT(MOD_RALT, KC_DOWN)                                                                     // ││
+/* ││*/ #define CTL_RGHT MT(MOD_RCTL, KC_RGHT)                                                                     // ││
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
@@ -252,11 +252,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*  │*/ [_NAVIGATE] = LAYOUT(                       //│           ╭╮╭╮ ╭╮╭╮
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
-//            │ CAPS LCK │ PRIN SCR │     ↑    │          │          │ │          │          │   PG UP  │  INSERT  │  NUMLCK  │
-/*    ╌┄┈┈──═*/  KC_CAPS ,  KC_PSCR ,   KC_UP  ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,  KC_PGUP ,  KC_INS  ,  KC_NUM ,
+//            │ CAPS LCK │ PRIN SCR │   PG UP  │          │          │ │          │          │     ↑    │  INSERT  │  NUMLCK  │
+/*    ╌┄┈┈──═*/  KC_CAPS ,  KC_PSCR ,  KC_PGUP ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,   KC_UP  ,  KC_INS  ,  KC_NUM ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//            │          │     ←    │     ↓    │     →    │          │ │          │   HOME   │  PG DOWN │    END   │          │
-/*           */  XXXXXXX , CTL_LEFT , ALT_DOWN , SHT_RGHT ,  XXXXXXX  ,   XXXXXXX , SHT_HOME , ALT_PGDN ,  CTL_END ,  XXXXXXX ,
+//            │          │   HOME   │  PG_DOWN │    END   │          │ │          │     ←    │     ↓    │     →    │          │
+/*           */  XXXXXXX , CTL_HOME , ALT_PGDN ,  SFT_END ,  XXXXXXX  ,   XXXXXXX , SFT_LEFT , ALT_DOWN , CTL_RGHT ,  XXXXXXX ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │          │          │          │          │          │          │ │          │          │          │          │          │          │
