@@ -55,6 +55,7 @@ enum custom_keycodes {
     CH_DQUO,  /* " */
     CH_SLSH,  /* / */
     CH_BSLS,  /* \ */
+    CH_CIRC,  /* ^ */
     CH_PIPE,  /* | */
     CH_GRV,   /* ` */
     CH_TILD,  /* ~ */
@@ -232,8 +233,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*  │*/ [_NUMBER] = LAYOUT(                         //│           ╭╮╭╮ ╭╮╭╮
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
-//            │    F9    │    F10   │    F11   │    F12   │          │ │     +    │     7    │     8    │     9    │     -    │
-/*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  XXXXXXX  ,   KC_PPLS ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  KC_MINS ,
+//            │    F9    │    F10   │    F11   │    F12   │     ^    │ │     +    │     7    │     8    │     9    │     -    │
+/*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  CH_CIRC  ,   KC_PPLS ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  KC_MINS ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │    F5    │    F6    │    F7    │    F8    │          │ │     *    │     4    │     5    │     6    │     /    │
 /*           */   KC_F5  ,  CTL_F6  ,  ALT_F7  ,  SHT_F8  ,  XXXXXXX  ,   KC_PAST ,  SHT_P4  ,  ALT_P5  ,  CTL_P6  ,  CH_SLSH ,
@@ -337,20 +338,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
             // │ c u s t o m   u s a   s p e c i f i c   k e y s                                                       │
             // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
-            case CH_QUOT: send_usa_symbol(US_QUOT); return false;
-            case CH_LCBR: send_usa_symbol(US_LCBR); return false;
-            case CH_RCBR: send_usa_symbol(US_RCBR); return false;
-            case CH_LBRC: send_usa_symbol(US_LBRC); return false;
-            case CH_RBRC: send_usa_symbol(US_RBRC); return false;
-            case CH_LABK: send_usa_symbol(US_LABK); return false;
-            case CH_RABK: send_usa_symbol(US_RABK); return false;
-            case CH_GRV:  send_usa_symbol(US_GRV);  return false;
-            case CH_TILD: send_usa_symbol(US_TILD); return false;
-            case CH_PIPE: send_usa_symbol(US_PIPE); return false;
-            case CH_HASH: send_usa_symbol(US_HASH); return false;
-            case CH_AT:   send_usa_symbol(US_AT);   return false;
-            case CH_AMPR: send_usa_symbol(US_AMPR); return false;
-            case CH_DLR:  send_usa_symbol(US_DLR);  return false;
+            case CH_QUOT: send_usa_symbol(US_QUOT);     return false;
+            case CH_LCBR: send_usa_symbol(US_LCBR);     return false;
+            case CH_RCBR: send_usa_symbol(US_RCBR);     return false;
+            case CH_LBRC: send_usa_symbol(US_LBRC);     return false;
+            case CH_RBRC: send_usa_symbol(US_RBRC);     return false;
+            case CH_LABK: send_usa_symbol(US_LABK);     return false;
+            case CH_RABK: send_usa_symbol(US_RABK);     return false;
+            case CH_GRV:  send_usa_symbol(US_GRV);      return false;
+            case CH_TILD: send_usa_symbol(US_TILD);     return false;
+            case CH_PIPE: send_usa_symbol(US_PIPE);     return false;
+            case CH_HASH: send_usa_symbol(US_HASH);     return false;
+            case CH_AT:   send_usa_symbol(US_AT);       return false;
+            case CH_AMPR: send_usa_symbol(US_AMPR);     return false;
+            case CH_DLR:  send_usa_symbol(US_DLR);      return false;
+            case CH_CIRC:  send_usa_symbol(US_CIRC);    return false;
             // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
             // │ c u s t o m   r u s   s p e c i f i c   k e y s                                                       │
             // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
