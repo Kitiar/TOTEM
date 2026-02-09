@@ -220,8 +220,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //            │     &    │     $    │     ;    │     ,    │     (    │ │     )    │     .    │     :    │     !    │     ?    │
 /*           */  CH_AMPR ,  CH_DLR  ,  CH_SCLN ,  CH_COMM , CH_LPRN   ,   CH_RPRN ,  CH_DOT  ,  CH_COLN ,  CH_EXLM ,  CH_QUES ,
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
-// │    @     │          │          │     \    │     "    │     [    │ │     ]    │     '    │     /    │          │          │     №    │
-/**/  CH_AT   ,  XXXXXXX ,  XXXXXXX ,  CH_BSLS , CH_DQUO  ,  CH_LBRC  ,   CH_RBRC ,  CH_QUOT ,  CH_SLSH ,  XXXXXXX ,  XXXXXXX ,  CH_NUM  ,
+// │    @     │     &    │     $    │     \    │     "    │     [    │ │     ]    │     '    │     /    │     !    │     ?    │     №    │
+/**/  CH_AT   ,  CH_AMPR ,  CH_DLR  ,  CH_BSLS , CH_DQUO  ,  CH_LBRC  ,   CH_RBRC ,  CH_QUOT ,  CH_SLSH ,  CH_EXLM ,  CH_QUES ,  CH_NUM  ,
 // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
 //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
 /*                                 */  _______ ,  _______ ,  _______  ,   _______ ,  NAV_ESC , _______  ),
