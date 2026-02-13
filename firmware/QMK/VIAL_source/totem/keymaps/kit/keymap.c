@@ -306,6 +306,33 @@ void send_rus_symbol(uint16_t rus_code) {
   }
 }
 
+bool process_mod_user(uint16_t mod, keyrecord_t *record) {
+  if (mod != XXXXXXX) {
+    if (record->event.pressed) {
+      if (record->tap.count <= 0) {
+        register_code(mod);
+        return false;
+      }
+    } else {
+      unregister_code(mod);
+      return false;
+    }
+  }
+  return true;
+}
+
+void send_mod_symbol(uint16_t mod, uint16_t usa_code, uint16_t rus_code, keyrecord_t *record) {
+  if (process_mod_user(mod, record)) send_symbol(usa_code, rus_code);
+}
+
+void send_mod_usa_symbol(uint16_t mod, uint16_t usa_code, keyrecord_t *record) {
+  if (process_mod_user(mod, record)) send_usa_symbol(usa_code);
+}
+
+void send_mod_rus_symbol(uint16_t mod, uint16_t rus_code, keyrecord_t *record) {
+  if (process_mod_user(mod, record)) send_rus_symbol(rus_code);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
