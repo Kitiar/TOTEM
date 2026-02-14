@@ -16,3 +16,7 @@ TOTEM is 34 keys column-staggered split keyboard made by @geigeigeist. It uses t
 
 You can use this command to compile the firmware
 `qmk compile -kb totem -km default`
+
+You can use these commands to flash the left / right firmware 
+`qmk flash -kb totem -km default -bl uf2-split-left`
+`qmk flash -kb totem -km default -bl uf2-split-right`
