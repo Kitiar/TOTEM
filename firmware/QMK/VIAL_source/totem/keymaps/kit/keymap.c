@@ -55,7 +55,6 @@ static uint16_t timers[T_NUM_TIMERS];
 enum custom_keycodes {
     SET_USA = SAFE_RANGE,
     SET_RUS,
-    CH_COLN,  /* : */
     CH_LCBR,  /* { */
     CH_RCBR,  /* } */
     CH_LBRC,  /* [ */
@@ -97,13 +96,19 @@ enum custom_keycodes {
     CH_C_A,    /* LSFT / А    */
     CH_C_COMM, /* LSFT / ,    */
     CH_C_F8,   /* LSFT / F8   */
-    CH_C_END,   /* LSFT / END */
+    CH_C_END,  /* LSFT / END */
 
     CH_C_J,    /* RSFT / J    */
     CH_C_O,    /* RSFT / О    */
     CH_C_DOT,  /* RSFT / .    */
     CH_C_P4,   /* RSFT / 4    */
-    CH_C_LEFT  /* RSFT / ←    */
+    CH_C_LEFT, /* RSFT / ←    */
+
+    CH_C_K,    /* RALT / K    */
+    CH_C_LE,   /* RALT / Л    */
+    CH_C_COLN, /* RALT / :    */
+    CH_C_P5,   /* RALT / 5    */
+    CH_C_DOWN  /* RALT / ↓    */
 };
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -140,7 +145,6 @@ enum {
 
 // ┌── USA LAYER MACRO NAMES ──────────────────────────────────────────────────────────────────────────────────────────┐
 // │┌── RIGHT HAND ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
-/* ││*/ #define ALT_K MT(MOD_RALT, US_K)                                                                           // ││
 /* ││*/ #define CTL_L MT(MOD_RCTL, US_L)                                                                           // ││
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -151,21 +155,18 @@ enum {
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // │┌── RIGHT HAND ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
 /* ││*/ #define SHA_SHCH    TD(TD_SHA_SHCH)                                                                        // ││
-/* ││*/ #define ALT_EL      MT(MOD_RALT, RU_EL)                                                                    // ││
 /* ││*/ #define CTL_DE      MT(MOD_RCTL, RU_DE)                                                                    // ││
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 // ┌── NUMBER LAYER MACRO NAMES ───────────────────────────────────────────────────────────────────────────────────────┐
 // │┌── RIGHT HAND ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
-/* ││*/ #define ALT_P5 MT(MOD_RALT, KC_P5)                                                                         // ││
 /* ││*/ #define CTL_P6 MT(MOD_RCTL, KC_P6)                                                                         // ││
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 // ┌── NAVIGATE LAYER MACRO NAMES ─────────────────────────────────────────────────────────────────────────────────────┐
 // │┌── RIGHT HAND ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
-/* ││*/ #define ALT_DOWN MT(MOD_RALT, KC_DOWN)                                                                     // ││
 /* ││*/ #define CTL_RGHT MT(MOD_RCTL, KC_RGHT)                                                                     // ││
 // │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -195,7 +196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*    ╌┄┈┈──═*/   US_Q   ,   US_W   ,   US_E   ,   US_R   ,   US_T    ,    US_Y   ,   US_U   ,   US_I   ,   US_O   ,   US_P   ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │     A    │     S    │     D    │     F    │     G    │ │     H    │     J    │     K    │     L    │          │
-/*           */   US_A   ,  CH_C_S  ,  CH_C_D  ,  CH_C_F  ,   US_G    ,    US_H   ,  CH_C_J  ,   ALT_K  ,   CTL_L  ,  XXXXXXX ,
+/*           */   US_A   ,  CH_C_S  ,  CH_C_D  ,  CH_C_F  ,   US_G    ,    US_H   ,  CH_C_J  ,  CH_C_K  ,   CTL_L  ,  XXXXXXX ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │    RUS   │     Z    │     X    │     C    │     V    │     B    │ │     N    │     M    │          │          │          │    GUI   │
@@ -215,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //            │          │          │          │          │     Ё    │ │          │          │     Щ    │          │          │
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │     Ф    │     Ы    │     В    │     А    │     П    │ │     Р    │     О    │     Л    │     Д    │     Ж    │
-/*           */   RU_EF  , CH_C_YERU,  CH_C_VE ,  CH_C_A  ,   RU_PE   ,    RU_ER  ,  CH_C_O  ,  ALT_EL  ,  CTL_DE  ,  RU_ZHE  ,
+/*           */   RU_EF  , CH_C_YERU,  CH_C_VE ,  CH_C_A  ,   RU_PE   ,    RU_ER  ,  CH_C_O  ,  CH_C_LE ,  CTL_DE  ,  RU_ZHE  ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     Ъ    │     Э    │
@@ -234,7 +235,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*    ╌┄┈┈──═*/  CH_GRV  ,  CH_TILD ,  KC_UNDS ,  CH_LABK ,  CH_LCBR  ,   CH_RCBR ,  CH_RABK ,  KC_MINS ,  CH_PIPE ,  CH_HASH ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │     &    │     $    │     ;    │     ,    │     (    │ │     )    │     .    │     :    │     !    │     ?    │
-/*           */  CH_AMPR , CH_C_DLR , CH_C_SCLN, CH_C_COMM, CH_LPRN   ,   CH_RPRN , CH_C_DOT ,  CH_COLN ,  CH_EXLM ,  CH_QUES ,
+/*           */  CH_AMPR , CH_C_DLR , CH_C_SCLN, CH_C_COMM, CH_LPRN   ,   CH_RPRN , CH_C_DOT , CH_C_COLN,  CH_EXLM ,  CH_QUES ,
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │    @     │     &    │     $    │     \    │     "    │     [    │ │     ]    │     '    │     /    │     !    │     ?    │     №    │
 /**/  CH_AT   ,  CH_AMPR ,  CH_DLR  ,  CH_BSLS , CH_DQUO  ,  CH_LBRC  ,   CH_RBRC ,  CH_QUOT ,  CH_SLSH ,  CH_EXLM ,  CH_QUES ,  CH_NUM  ,
@@ -252,7 +253,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  CH_CIRC  ,   KC_PAST ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  CH_SLSH ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │    F5    │    F6    │    F7    │    F8    │     =    │ │     +    │     4    │     5    │     6    │     -    │
-/*           */   KC_F5  ,  CH_C_F6 ,  CH_C_F7 ,  CH_C_F8 ,  KC_EQL   ,   KC_PPLS ,  CH_C_P4 ,  ALT_P5  ,  CTL_P6  ,  KC_MINS ,
+/*           */   KC_F5  ,  CH_C_F6 ,  CH_C_F7 ,  CH_C_F8 ,  KC_EQL   ,   KC_PPLS ,  CH_C_P4 ,  CH_C_P5 ,  CTL_P6  ,  KC_MINS ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │          │    F1    │    F2    │    F3    │    F4    │          │ │     0    │     1    │     2    │     3    │          │     %    │
@@ -271,7 +272,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*    ╌┄┈┈──═*/  KC_CAPS ,  KC_PSCR ,  KC_PGUP ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,   KC_UP  ,  KC_INS  ,  KC_NUM ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │          │   HOME   │  PG_DOWN │    END   │          │ │          │     ←    │     ↓    │     →    │          │
-/*           */  XXXXXXX , CH_C_HOME, CH_C_PGDN, CH_C_END ,  XXXXXXX  ,   XXXXXXX , CH_C_LEFT, ALT_DOWN , CTL_RGHT ,  XXXXXXX ,
+/*           */  XXXXXXX , CH_C_HOME, CH_C_PGDN, CH_C_END ,  XXXXXXX  ,   XXXXXXX , CH_C_LEFT, CH_C_DOWN, CTL_RGHT ,  XXXXXXX ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │          │          │          │          │          │          │ │          │          │          │          │          │          │
@@ -367,7 +368,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
             // │ c u s t o m   l a n g u a g e   s p e c i f i c   k e y s                                             │
             // └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
-            case CH_COLN: send_symbol(US_COLN, RU_COLN); return false;
             case CH_DQUO: send_symbol(US_DQUO, RU_DQUO); return false;
             case CH_SLSH: send_symbol(US_SLSH, RU_SLSH); return false;
             case CH_BSLS: send_symbol(US_BSLS, RU_BSLS); return false;
@@ -436,6 +436,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CH_C_P4:    send_mod_code(KC_RSFT, T_RSFT, KC_P8, record);          return false;
         case CH_C_LEFT:  send_mod_code(KC_RSFT, T_RSFT, KC_LEFT, record);        return false;
         case CH_C_DOT: send_mod_symbol(KC_RSFT, T_RSFT, US_DOT, RU_DOT, record); return false;
+        // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+        // │ r i g h t   a l t   k e y s                                                                               │
+        // └───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+        case CH_C_K:      send_mod_code(KC_RALT, T_RALT, US_K, record);             return false;
+        case CH_C_LE:     send_mod_code(KC_RALT, T_RALT, RU_LE, record);            return false;
+        case CH_C_P5:     send_mod_code(KC_RALT, T_RALT, KC_P5, record);            return false;
+        case CH_C_DOWN:   send_mod_code(KC_RALT, T_RALT, KC_DOWN, record);          return false;
+        case CH_C_COLN: send_mod_symbol(KC_RALT, T_RALT, US_COLN, RU_COLN, record); return false;
+        // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+        // │ r i g h t   c o n t r o l   k e y s                                                                       │
+        // └───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
     }
     return true;
 };
