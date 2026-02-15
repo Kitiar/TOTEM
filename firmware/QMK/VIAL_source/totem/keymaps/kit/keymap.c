@@ -237,10 +237,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
 //            │    F9    │    F10   │    F11   │    F12   │     ^    │ │     *    │     7    │     8    │     9    │     /    │
-/*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  CH_CIRC  ,   KC_PAST ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  CH_SLSH ,
+/*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  CH_CIRC  ,   KC_ASTR ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  CH_SLSH ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │    F5    │    F6    │    F7    │    F8    │     =    │ │     +    │     4    │     5    │     6    │     -    │
-/*           */   KC_F5  ,  CH_C_F6 ,  CH_C_F7 ,  CH_C_F8 ,  KC_EQL   ,   KC_PPLS ,  CH_C_P4 ,  CH_C_P5 ,  CH_C_P6 ,  KC_MINS ,
+/*           */   KC_F5  ,  CH_C_F6 ,  CH_C_F7 ,  CH_C_F8 ,  KC_EQL   ,   KC_PLUS ,  CH_C_P4 ,  CH_C_P5 ,  CH_C_P6 ,  KC_MINS ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │          │    F1    │    F2    │    F3    │    F4    │          │ │     0    │     1    │     2    │     3    │          │     %    │
@@ -389,48 +389,48 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //┌── c u s t o m   k e y s   w i t h   m o d s ───────────────────────────────────────────────────────────────────────┐
 //│┌── l e f t ───────────────────────────────────────────────────────────────────────────────────────────────────────┐│
 //││┌── c o n t r o l   k e y s ─────────────────────────────────────────────────────────────────────────────────────┐││
-/*│││*/ case CH_C_S:          send_mod_code(MOD_LCTL, T_LCTL, US_S, record);    return false;                       //│││
-/*│││*/ case CH_C_YERU:       send_mod_code(MOD_LCTL, T_LCTL, RU_YERU, record); return false;                       //│││
-/*│││*/ case CH_C_F6:         send_mod_code(MOD_LCTL, T_LCTL, KC_F6, record);   return false;                       //│││
-/*│││*/ case CH_C_HOME:       send_mod_code(MOD_LCTL, T_LCTL, KC_HOME, record); return false;                       //│││
-/*│││*/ case CH_C_DLR:  send_mod_usa_symbol(MOD_LCTL, T_LCTL, US_DLR, record);  return false;                       //│││
+/*│││*/ case CH_C_S:          send_mod_code(MOD_LCTL, T_LCTL, US_S, record);    return false;                      //│││
+/*│││*/ case CH_C_YERU:       send_mod_code(MOD_LCTL, T_LCTL, RU_YERU, record); return false;                      //│││
+/*│││*/ case CH_C_F6:         send_mod_code(MOD_LCTL, T_LCTL, KC_F6, record);   return false;                      //│││
+/*│││*/ case CH_C_HOME:       send_mod_code(MOD_LCTL, T_LCTL, KC_HOME, record); return false;                      //│││
+/*│││*/ case CH_C_DLR:  send_mod_usa_symbol(MOD_LCTL, T_LCTL, US_DLR, record);  return false;                      //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //││┌── a l t   k e y s ─────────────────────────────────────────────────────────────────────────────────────────────┐││
-/*│││*/ case CH_C_D:      send_mod_code(MOD_LALT, T_LALT, US_D, record);             return false;                  //│││
-/*│││*/ case CH_C_VE:     send_mod_code(MOD_LALT, T_LALT, RU_VE, record);            return false;                  //│││
-/*│││*/ case CH_C_F7:     send_mod_code(MOD_LALT, T_LALT, KC_F7, record);            return false;                  //│││
-/*│││*/ case CH_C_PGDN:   send_mod_code(MOD_LALT, T_LALT, KC_PGDN, record);          return false;                  //│││
-/*│││*/ case CH_C_SCLN: send_mod_symbol(MOD_LALT, T_LALT, US_SCLN, RU_SCLN, record); return false;                  //│││
+/*│││*/ case CH_C_D:      send_mod_code(MOD_LALT, T_LALT, US_D, record);             return false;                 //│││
+/*│││*/ case CH_C_VE:     send_mod_code(MOD_LALT, T_LALT, RU_VE, record);            return false;                 //│││
+/*│││*/ case CH_C_F7:     send_mod_code(MOD_LALT, T_LALT, KC_F7, record);            return false;                 //│││
+/*│││*/ case CH_C_PGDN:   send_mod_code(MOD_LALT, T_LALT, KC_PGDN, record);          return false;                 //│││
+/*│││*/ case CH_C_SCLN: send_mod_symbol(MOD_LALT, T_LALT, US_SCLN, RU_SCLN, record); return false;                 //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //││┌── s h i f t   k e y s ─────────────────────────────────────────────────────────────────────────────────────────┐││
-/*│││*/ case CH_C_F:      send_mod_code(MOD_LSFT, T_LSFT, US_F, record);             return false;                  //│││
-/*│││*/ case CH_C_A:      send_mod_code(MOD_LSFT, T_LSFT, RU_A, record);             return false;                  //│││
-/*│││*/ case CH_C_F8:     send_mod_code(MOD_LSFT, T_LSFT, KC_F8, record);            return false;                  //│││
-/*│││*/ case CH_C_END:    send_mod_code(MOD_LSFT, T_LSFT, KC_END, record);           return false;                  //│││
-/*│││*/ case CH_C_COMM: send_mod_symbol(MOD_LSFT, T_LSFT, US_COMM, RU_COMM, record); return false;                  //│││
+/*│││*/ case CH_C_F:      send_mod_code(MOD_LSFT, T_LSFT, US_F, record);             return false;                 //│││
+/*│││*/ case CH_C_A:      send_mod_code(MOD_LSFT, T_LSFT, RU_A, record);             return false;                 //│││
+/*│││*/ case CH_C_F8:     send_mod_code(MOD_LSFT, T_LSFT, KC_F8, record);            return false;                 //│││
+/*│││*/ case CH_C_END:    send_mod_code(MOD_LSFT, T_LSFT, KC_END, record);           return false;                 //│││
+/*│││*/ case CH_C_COMM: send_mod_symbol(MOD_LSFT, T_LSFT, US_COMM, RU_COMM, record); return false;                 //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //│└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 //│┌── r i g h t ─────────────────────────────────────────────────────────────────────────────────────────────────────┐│
 //││┌── s h i f t   k e y s ─────────────────────────────────────────────────────────────────────────────────────────┐││
-/*│││*/ case CH_C_J:     send_mod_code(MOD_RSFT, T_RSFT, US_J, record);           return false;                     //│││
-/*│││*/ case CH_C_O:     send_mod_code(MOD_RSFT, T_RSFT, RU_O, record);           return false;                     //│││
-/*│││*/ case CH_C_P4:    send_mod_code(MOD_RSFT, T_RSFT, KC_P4, record);          return false;                     //│││
-/*│││*/ case CH_C_LEFT:  send_mod_code(MOD_RSFT, T_RSFT, KC_LEFT, record);        return false;                     //│││
-/*│││*/ case CH_C_DOT: send_mod_symbol(MOD_RSFT, T_RSFT, US_DOT, RU_DOT, record); return false;                     //│││
+/*│││*/ case CH_C_J:     send_mod_code(MOD_RSFT, T_RSFT, US_J, record);           return false;                    //│││
+/*│││*/ case CH_C_O:     send_mod_code(MOD_RSFT, T_RSFT, RU_O, record);           return false;                    //│││
+/*│││*/ case CH_C_P4:    send_mod_code(MOD_RSFT, T_RSFT, KC_P4, record);          return false;                    //│││
+/*│││*/ case CH_C_LEFT:  send_mod_code(MOD_RSFT, T_RSFT, KC_LEFT, record);        return false;                    //│││
+/*│││*/ case CH_C_DOT: send_mod_symbol(MOD_RSFT, T_RSFT, US_DOT, RU_DOT, record); return false;                    //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //││┌── a l t   k e y s ─────────────────────────────────────────────────────────────────────────────────────────────┐││
-/*│││*/ case CH_C_K:      send_mod_code(MOD_RALT, T_RALT, US_K, record);             return false;                  //│││
-/*│││*/ case CH_C_EL:     send_mod_code(MOD_RALT, T_RALT, RU_EL, record);            return false;                  //│││
-/*│││*/ case CH_C_P5:     send_mod_code(MOD_RALT, T_RALT, KC_P5, record);            return false;                  //│││
-/*│││*/ case CH_C_DOWN:   send_mod_code(MOD_RALT, T_RALT, KC_DOWN, record);          return false;                  //│││
-/*│││*/ case CH_C_COLN: send_mod_symbol(MOD_RALT, T_RALT, US_COLN, RU_COLN, record); return false;                  //│││
+/*│││*/ case CH_C_K:      send_mod_code(MOD_RALT, T_RALT, US_K, record);             return false;                 //│││
+/*│││*/ case CH_C_EL:     send_mod_code(MOD_RALT, T_RALT, RU_EL, record);            return false;                 //│││
+/*│││*/ case CH_C_P5:     send_mod_code(MOD_RALT, T_RALT, KC_P5, record);            return false;                 //│││
+/*│││*/ case CH_C_DOWN:   send_mod_code(MOD_RALT, T_RALT, KC_DOWN, record);          return false;                 //│││
+/*│││*/ case CH_C_COLN: send_mod_symbol(MOD_RALT, T_RALT, US_COLN, RU_COLN, record); return false;                 //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
-//││┌── c o n t r o l e y s ─────────────────────────────────────────────────────────────────────────────────────────┐││
-/*│││*/ case CH_C_L:       send_mod_code(MOD_RCTL, T_RCTL, US_L, record);             return false;                 //│││
-/*│││*/ case CH_C_DE:      send_mod_code(MOD_RCTL, T_RCTL, RU_DE, record);            return false;                 //│││
-/*│││*/ case CH_C_P6:      send_mod_code(MOD_RCTL, T_RCTL, KC_P6, record);            return false;                 //│││
-/*│││*/ case CH_C_RGHT:    send_mod_code(MOD_RCTL, T_RCTL, KC_RGHT, record);          return false;                 //│││
-/*│││*/ case CH_C_EXLM:  send_mod_symbol(MOD_RCTL, T_RCTL, US_EXLM, RU_EXLM, record); return false;                 //│││
+//││┌── c o n t r o l   k e y s ─────────────────────────────────────────────────────────────────────────────────────┐││
+/*│││*/ case CH_C_L:       send_mod_code(MOD_RCTL, T_RCTL, US_L, record);             return false;                //│││
+/*│││*/ case CH_C_DE:      send_mod_code(MOD_RCTL, T_RCTL, RU_DE, record);            return false;                //│││
+/*│││*/ case CH_C_P6:      send_mod_code(MOD_RCTL, T_RCTL, KC_P6, record);            return false;                //│││
+/*│││*/ case CH_C_RGHT:    send_mod_code(MOD_RCTL, T_RCTL, KC_RGHT, record);          return false;                //│││
+/*│││*/ case CH_C_EXLM:  send_mod_symbol(MOD_RCTL, T_RCTL, US_EXLM, RU_EXLM, record); return false;                //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //│└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
 //└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
