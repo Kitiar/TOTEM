@@ -43,6 +43,8 @@ enum custom_timers {
     T_RSFT,
     T_RCTL,
     T_RALT,
+    T_IE_YO,
+    T_SHA_SCH,
     T_NUM_TIMERS
 };
 
@@ -79,6 +81,9 @@ enum custom_keycodes {
     CH_QUES,  /* ? */
     CH_NUM,   /* № */
     CH_PERC,  /* % */
+
+    CH_IE_YO,    /* Е / Ё */ 
+    CH_SHA_SCH,  /* Ш / Щ */ 
 
     CH_C_S,    /* LCTR / S    */
     CH_C_YERU, /* LCTR / Ы    */
@@ -118,12 +123,13 @@ enum custom_keycodes {
 };
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ d e f i n e   t a p   d a n c i n g   k e y c o d e s                                                             │
+// │ d e f i n e   t a p p i n g   t e r m   r e t u r n   c o d e s                                                   │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-enum {
-    TD_IE_YO = 0, /* Е / Ё */
-    TD_SHA_SHCH,  /* Ш / Щ */
+enum custom_tapping_term {
+    NONE,
+    QUICK_PRESS,
+    LONG_PRESS
 };
 
 // ┌─────────────────────────────────────────────────┐
@@ -148,25 +154,6 @@ enum {
 /* │*/ #define NAV_ESC  LT(_NAVIGATE, KC_ESC)                                                                       // │
 /* │*/ #define NAV_TAB  LT(_NAVIGATE, KC_TAB)                                                                       // │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-// ┌── RUS LAYER MACRO NAMES ──────────────────────────────────────────────────────────────────────────────────────────┐
-// │┌── LEFT HAND ────────────────────────────────────────────────────────────────────────────────────────────────────┐│
-/* ││*/ #define IE_YO       TD(TD_IE_YO)                                                                           // ││
-// │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
-// │┌── RIGHT HAND ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
-/* ││*/ #define SHA_SHCH    TD(TD_SHA_SHCH)                                                                        // ││
-// │└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
-// └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-
-// ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-// │ T A P   D A N C E   A C T I O N S                                                                                 │
-// └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-// ▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘
-
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_IE_YO] = ACTION_TAP_DANCE_DOUBLE(RU_IE, RU_YO),
-    [TD_SHA_SHCH] = ACTION_TAP_DANCE_DOUBLE(RU_SHA, RU_SHCH),
-};
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ K E Y M A P S                                                                                                     │
@@ -199,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
 //            │     Й    │     Ц    │     У    │     К    │     Е    │ │     Н    │     Г    │     Ш    │     З    │     Х    │
-/*    ╌┄┈┈──═*/  RU_SHTI ,  RU_TSE  ,   RU_U   ,   RU_KA  ,   IE_YO  ,    RU_EN  ,  RU_GHE   , SHA_SHCH ,   RU_ZE  ,   RU_HA  ,
+/*    ╌┄┈┈──═*/  RU_SHTI ,  RU_TSE  ,   RU_U   ,   RU_KA  , CH_IE_YO ,    RU_EN  ,  RU_GHE   ,CH_SHA_SCH,   RU_ZE  ,   RU_HA  ,
 //            │          │          │          │          │     Ё    │ │          │          │     Щ    │          │          │
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │     Ф    │     Ы    │     В    │     А    │     П    │ │     Р    │     О    │     Л    │     Д    │     Ж    │
@@ -338,6 +325,26 @@ void send_mod_rus_symbol(uint16_t mod, uint16_t timer_idx, uint16_t rus_code, ke
   if (process_mod_user(mod, timer_idx, record)) send_rus_symbol(rus_code);
 }
 
+uint16_t process_tapping_term(uint16_t timer_idx, keyrecord_t *record) {
+  if (record->event.pressed) {
+    timers[timer_idx] = timer_read();
+  } else {
+    if (timer_elapsed(timers[timer_idx]) < TAPPING_TERM) {
+        return QUICK_PRESS;
+    } else {
+        return LONG_PRESS;
+    }
+  }
+  return NONE;
+}
+
+void send_tapping_term_code(uint16_t timer_idx, uint16_t quick_code, uint16_t long_code, keyrecord_t *record) {
+  switch(process_tapping_term(timer_idx, record)) {
+    case QUICK_PRESS: tap_code16(quick_code); break;
+    case LONG_PRESS:  tap_code16(long_code);  break;
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
@@ -433,6 +440,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 /*│││*/ case CH_C_EXLM:  send_mod_symbol(MOD_RCTL, T_RCTL, US_EXLM, RU_EXLM, record); return false;                //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //│└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘│
+//└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+//┌── c u s t o m   k e y s   t a p p i n g   t e r m ─────────────────────────────────────────────────────────────────┐
+/*│*/   case CH_IE_YO:   send_tapping_term_code(T_IE_YO, RU_IE, RU_YO, record);         return false;                //│
+/*│*/   case CH_SHA_SCH: send_tapping_term_code(T_SHA_SCH, RU_SHA, RU_SHCH, record);    return false;                //│
 //└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
     }
     return true;
