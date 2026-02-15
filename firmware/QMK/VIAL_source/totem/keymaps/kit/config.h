@@ -5,6 +5,8 @@
 
 #define TAPPING_TERM 175
 
+#define PERMISSIVE_HOLD
+
 #define SERIAL_USART_FULL_DUPLEX  // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN GP0   // USART TX pin
 #define SERIAL_USART_RX_PIN GP1   // USART RX pin
