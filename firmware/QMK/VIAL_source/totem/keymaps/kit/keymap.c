@@ -106,19 +106,19 @@ enum custom_keycodes {
     CH_C_J,    /* RSFT / J    */
     CH_C_O,    /* RSFT / О    */
     CH_C_DOT,  /* RSFT / .    */
-    CH_C_P4,   /* RSFT / 4    */
+    CH_C_4,    /* RSFT / 4    */
     CH_C_LEFT, /* RSFT / ←    */
 
     CH_C_K,    /* RALT / K    */
     CH_C_EL,   /* RALT / Л    */
     CH_C_COLN, /* RALT / :    */
-    CH_C_P5,   /* RALT / 5    */
+    CH_C_5,    /* RALT / 5    */
     CH_C_DOWN, /* RALT / ↓    */
 
     CH_C_L,    /* RCTR / L    */
     CH_C_DE,   /* RCTR / Д    */
     CH_C_EXLM, /* RCTR / !    */
-    CH_C_P6,   /* RCTR / 6    */
+    CH_C_6,    /* RCTR / 6    */
     CH_C_RGHT  /* RCTR / →    */
 };
 
@@ -186,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
 //            │     Й    │     Ц    │     У    │     К    │     Е    │ │     Н    │     Г    │     Ш    │     З    │     Х    │
-/*    ╌┄┈┈──═*/  RU_SHTI ,  RU_TSE  ,   RU_U   ,   RU_KA  , CH_IE_YO ,    RU_EN  ,  RU_GHE   ,CH_SHA_SCH,   RU_ZE  ,   RU_HA  ,
+/*    ╌┄┈┈──═*/  RU_SHTI ,  RU_TSE  ,   RU_U   ,   RU_KA  , CH_IE_YO  ,    RU_EN  ,  RU_GHE  ,CH_SHA_SCH,   RU_ZE  ,   RU_HA  ,
 //            │          │          │          │          │     Ё    │ │          │          │     Щ    │          │          │
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │     Ф    │     Ы    │     В    │     А    │     П    │ │     Р    │     О    │     Л    │     Д    │     Ж    │
@@ -224,14 +224,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  └─────────────────────────────────────────────────┘           │╰╯╰─╯╰╯│
 //            ┌──────────┬──────────┬──────────┬──────────┬───────╨──┐ ┌──╨───────┬──────────┬──────────┬──────────┬──────────┐
 //            │    F9    │    F10   │    F11   │    F12   │     ^    │ │     *    │     7    │     8    │     9    │     /    │
-/*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  CH_CIRC  ,   KC_ASTR ,   KC_P7  ,   KC_P8  ,   KC_P9  ,  CH_SLSH ,
+/*    ╌┄┈┈──═*/   KC_F9  ,  KC_F10  ,  KC_F11  ,  KC_F12  ,  CH_CIRC  ,   KC_ASTR ,   KC_7   ,   KC_8   ,   KC_9   ,  CH_SLSH ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
 //            │    F5    │    F6    │    F7    │    F8    │     =    │ │     +    │     4    │     5    │     6    │     -    │
-/*           */   KC_F5  ,  CH_C_F6 ,  CH_C_F7 ,  CH_C_F8 ,  KC_EQL   ,   KC_PLUS ,  CH_C_P4 ,  CH_C_P5 ,  CH_C_P6 ,  KC_MINS ,
+/*           */   KC_F5  ,  CH_C_F6 ,  CH_C_F7 ,  CH_C_F8 ,  KC_EQL   ,   KC_PLUS ,  CH_C_4  ,  CH_C_5  ,  CH_C_6  ,  KC_MINS ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │          │    F1    │    F2    │    F3    │    F4    │          │ │     0    │     1    │     2    │     3    │          │     %    │
-/**/  XXXXXXX ,   KC_F1  ,   KC_F2  ,   KC_F3  ,   KC_F4  ,  XXXXXXX  ,    KC_P0  ,   KC_P1  ,   KC_P2  ,   KC_P3  ,  XXXXXXX  ,  CH_PERC ,
+/**/  XXXXXXX ,   KC_F1  ,   KC_F2  ,   KC_F3  ,   KC_F4  ,  XXXXXXX  ,    KC_0   ,   KC_1   ,   KC_2   ,   KC_3   ,  XXXXXXX  ,  CH_PERC ,
 // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
 //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
 /*                                 */  _______ ,  NAV_TAB ,  _______  ,   _______ ,  _______ , _______  ),
@@ -421,21 +421,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //││┌── s h i f t   k e y s ─────────────────────────────────────────────────────────────────────────────────────────┐││
 /*│││*/ case CH_C_J:     send_mod_code(KC_RSFT, T_RSFT, US_J, record);           return false;                    //│││
 /*│││*/ case CH_C_O:     send_mod_code(KC_RSFT, T_RSFT, RU_O, record);           return false;                    //│││
-/*│││*/ case CH_C_P4:    send_mod_code(KC_RSFT, T_RSFT, KC_P4, record);          return false;                    //│││
+/*│││*/ case CH_C_4:     send_mod_code(KC_RSFT, T_RSFT, KC_4, record);          return false;                    //│││
 /*│││*/ case CH_C_LEFT:  send_mod_code(KC_RSFT, T_RSFT, KC_LEFT, record);        return false;                    //│││
 /*│││*/ case CH_C_DOT: send_mod_symbol(KC_RSFT, T_RSFT, US_DOT, RU_DOT, record); return false;                    //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //││┌── a l t   k e y s ─────────────────────────────────────────────────────────────────────────────────────────────┐││
 /*│││*/ case CH_C_K:      send_mod_code(KC_RALT, T_RALT, US_K, record);             return false;                 //│││
 /*│││*/ case CH_C_EL:     send_mod_code(KC_RALT, T_RALT, RU_EL, record);            return false;                 //│││
-/*│││*/ case CH_C_P5:     send_mod_code(KC_RALT, T_RALT, KC_P5, record);            return false;                 //│││
+/*│││*/ case CH_C_5:      send_mod_code(KC_RALT, T_RALT, KC_5, record);            return false;                 //│││
 /*│││*/ case CH_C_DOWN:   send_mod_code(KC_RALT, T_RALT, KC_DOWN, record);          return false;                 //│││
 /*│││*/ case CH_C_COLN: send_mod_symbol(KC_RALT, T_RALT, US_COLN, RU_COLN, record); return false;                 //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
 //││┌── c o n t r o l   k e y s ─────────────────────────────────────────────────────────────────────────────────────┐││
 /*│││*/ case CH_C_L:       send_mod_code(KC_RCTL, T_RCTL, US_L, record);             return false;                //│││
 /*│││*/ case CH_C_DE:      send_mod_code(KC_RCTL, T_RCTL, RU_DE, record);            return false;                //│││
-/*│││*/ case CH_C_P6:      send_mod_code(KC_RCTL, T_RCTL, KC_P6, record);            return false;                //│││
+/*│││*/ case CH_C_6:       send_mod_code(KC_RCTL, T_RCTL, KC_6, record);            return false;                //│││
 /*│││*/ case CH_C_RGHT:    send_mod_code(KC_RCTL, T_RCTL, KC_RGHT, record);          return false;                //│││
 /*│││*/ case CH_C_EXLM:  send_mod_symbol(KC_RCTL, T_RCTL, US_EXLM, RU_EXLM, record); return false;                //│││
 //││└────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘││
