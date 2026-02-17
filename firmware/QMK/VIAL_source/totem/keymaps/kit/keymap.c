@@ -36,19 +36,17 @@ enum custom_layers {
 // │ d e f i n e   t i m e r s                                                                                         │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-enum custom_timers {
+enum custom_mod_timers {
     T_LCTL,
     T_LALT,
     T_LSFT,
     T_RSFT,
     T_RCTL,
     T_RALT,
-    T_IE_YO,
-    T_SHA_SCH,
-    T_NUM_TIMERS
+    T_MOD_NUM
 };
 
-static uint16_t timers[T_NUM_TIMERS];
+static uint16_t mod_timers[T_MOD_NUM];
 
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ d e f i n e   c u s t o m   k e y c o d e s                                                                       │
@@ -131,6 +129,14 @@ enum custom_tapping_term {
     QUICK_PRESS,
     LONG_PRESS
 };
+
+enum custom_tapping_term_timers {
+    T_IE_YO,
+    T_SHA_SCH,
+    T_TAPPING_TERM_NUM
+};
+
+static uint16_t tapping_term_timers[T_TAPPING_TERM_NUM];
 
 // ┌─────────────────────────────────────────────────┐
 // │ d e f i n e   m a c r o n a m e s               │
@@ -298,7 +304,7 @@ void send_rus_symbol(uint16_t rus_code) {
 
 uint32_t deferred_register_mod(uint32_t trigger_time, void *cb_arg) {
     uint16_t timer_idx = (uint16_t)(uintptr_t)cb_arg;
-    if (timers[timer_idx] > 0) {
+    if (mod_timers[timer_idx] > 0) {
         switch (timer_idx) {
             case T_LCTL: register_code(KC_LCTL); break;
             case T_LALT: register_code(KC_LALT); break;
@@ -313,11 +319,11 @@ uint32_t deferred_register_mod(uint32_t trigger_time, void *cb_arg) {
 
 bool process_custom_register_mod(uint16_t mod, uint16_t timer_idx, keyrecord_t *record) {
   if (record->event.pressed) {
-    timers[timer_idx] = timer_read();
+    mod_timers[timer_idx] = timer_read();
     defer_exec(TAPPING_TERM, deferred_register_mod, (void *)(uintptr_t)timer_idx);
   } else {
-    uint16_t timer = timers[timer_idx];
-    timers[timer_idx] = 0;
+    uint16_t timer = mod_timers[timer_idx];
+    mod_timers[timer_idx] = 0;
     unregister_code(mod);
     if (timer_elapsed(timer) < TAPPING_TERM) {
         return true;
@@ -344,9 +350,9 @@ void send_mod_rus_symbol(uint16_t mod, uint16_t timer_idx, uint16_t rus_code, ke
 
 uint16_t process_tapping_term(uint16_t timer_idx, keyrecord_t *record) {
   if (record->event.pressed) {
-    timers[timer_idx] = timer_read();
+    tapping_term_timers[timer_idx] = timer_read();
   } else {
-    if (timer_elapsed(timers[timer_idx]) < TAPPING_TERM) {
+    if (timer_elapsed(tapping_term_timers[timer_idx]) < TAPPING_TERM) {
         return QUICK_PRESS;
     } else {
         return LONG_PRESS;
