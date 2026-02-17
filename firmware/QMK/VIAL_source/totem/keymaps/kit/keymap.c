@@ -48,6 +48,17 @@ enum custom_mod_timers {
 
 static uint16_t mod_timers[T_MOD_NUM];
 
+void custom_mod(void (*action)(uint8_t), uint16_t timer_idx) {
+  switch (timer_idx) {
+    case T_LCTL: action(KC_LCTL); break;
+    case T_LALT: action(KC_LALT); break;
+    case T_LSFT: action(KC_LSFT); break;
+    case T_RSFT: action(KC_RSFT); break;
+    case T_RCTL: action(KC_RCTL); break;
+    case T_RALT: action(KC_RALT); break;
+  }
+}
+
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ d e f i n e   c u s t o m   k e y c o d e s                                                                       │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -124,12 +135,6 @@ enum custom_keycodes {
 // │ d e f i n e   t a p p i n g   t e r m   r e t u r n   c o d e s                                                   │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-enum custom_tapping_term {
-    NONE,
-    QUICK_PRESS,
-    LONG_PRESS
-};
-
 enum custom_tapping_term_timers {
     T_IE_YO,
     T_SHA_SCH,
@@ -137,6 +142,13 @@ enum custom_tapping_term_timers {
 };
 
 static uint16_t tapping_term_timers[T_TAPPING_TERM_NUM];
+
+void tapping_term_code(uint16_t timer_idx, bool is_short) {
+  switch (timer_idx) {
+    case T_IE_YO:   is_short ? tap_code16(RU_IE)  : tap_code16(RU_YO);    break;
+    case T_SHA_SCH: is_short ? tap_code16(RU_SHA) : tap_code16(RU_SHCH);  break;
+  }
+}
 
 // ┌─────────────────────────────────────────────────┐
 // │ d e f i n e   m a c r o n a m e s               │
@@ -302,17 +314,6 @@ void send_rus_symbol(uint16_t rus_code) {
   }
 }
 
-void custom_mod(void (*action)(uint8_t), uint16_t timer_idx) {
-  switch (timer_idx) {
-    case T_LCTL: action(KC_LCTL); break;
-    case T_LALT: action(KC_LALT); break;
-    case T_LSFT: action(KC_LSFT); break;
-    case T_RSFT: action(KC_RSFT); break;
-    case T_RCTL: action(KC_RCTL); break;
-    case T_RALT: action(KC_RALT); break;
-  }
-}
-
 uint32_t deferred_register_mod(uint32_t trigger_time, void *cb_arg) {
   uint16_t timer_idx = (uint16_t)(uintptr_t)cb_arg;
   if (mod_timers[timer_idx] > 0) {
@@ -350,13 +351,6 @@ void send_mod_usa_symbol(uint16_t timer_idx, uint16_t usa_code, keyrecord_t *rec
 
 void send_mod_rus_symbol(uint16_t timer_idx, uint16_t rus_code, keyrecord_t *record) {
   if (process_custom_register_mod(timer_idx, record)) send_rus_symbol(rus_code);
-}
-
-void tapping_term_code(uint16_t timer_idx, bool is_short) {
-  switch (timer_idx) {
-    case T_IE_YO:   is_short ? tap_code16(RU_IE)  : tap_code16(RU_YO);    break;
-    case T_SHA_SCH: is_short ? tap_code16(RU_SHA) : tap_code16(RU_SHCH);  break;
-  }
 }
 
 uint32_t deferred_tapping_term_code(uint32_t trigger_time, void *cb_arg) {
