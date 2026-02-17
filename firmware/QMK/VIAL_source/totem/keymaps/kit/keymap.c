@@ -194,7 +194,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │   DF US  │     Я    │     Ч    │     С    │     М    │     И    │ │     Т    │     Ь    │     Б    │     Ю    │     Ъ    │     Э    │
-/**/  SET_USA ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,   RU_I   ,    RU_TE  ,   RU_SOFT ,   RU_BE  ,   RU_YU  ,  RU_HARD ,   RU_E   ,
+/**/  SET_USA ,   RU_YA  ,  RU_CHE  ,   RU_ES  ,   RU_EM  ,    RU_I   ,    RU_TE  ,  RU_SOFT ,   RU_BE  ,   RU_YU  ,  RU_HARD ,   RU_E   ,
 // └──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────┘
 //                                  │    DEL   │    TAB   │   SPACE  │ │   ENTER  │    ESC   │ BACKSPACE│
 /*                                 */  KC_DEL  , SPEC_TAB ,  KC_SPC   ,   KC_ENT  ,  NUM_ESC , KC_BSPC  ),
@@ -296,13 +296,30 @@ void send_rus_symbol(uint16_t rus_code) {
   }
 }
 
-bool process_mod_user(uint16_t mod, uint16_t timer_idx, keyrecord_t *record) {
+uint32_t deferred_register_mod(uint32_t trigger_time, void *cb_arg) {
+    uint16_t timer_idx = (uint16_t)(uintptr_t)cb_arg;
+    if (timers[timer_idx] > 0) {
+        switch (timer_idx) {
+            case T_LCTL: register_code(KC_LCTL); break;
+            case T_LALT: register_code(KC_LALT); break;
+            case T_LSFT: register_code(KC_LSFT); break;
+            case T_RSFT: register_code(KC_RSFT); break;
+            case T_RCTL: register_code(KC_RCTL); break;
+            case T_RALT: register_code(KC_RALT); break;
+        }
+    }
+    return 0;
+}
+
+bool process_custom_register_mod(uint16_t mod, uint16_t timer_idx, keyrecord_t *record) {
   if (record->event.pressed) {
     timers[timer_idx] = timer_read();
-    register_code(mod);
+    defer_exec(TAPPING_TERM, deferred_register_mod, (void *)(uintptr_t)timer_idx);
   } else {
+    uint16_t timer = timers[timer_idx];
+    timers[timer_idx] = 0;
     unregister_code(mod);
-    if (timer_elapsed(timers[timer_idx]) < TAPPING_TERM) {
+    if (timer_elapsed(timer) < TAPPING_TERM) {
         return true;
     }
   }
@@ -310,19 +327,19 @@ bool process_mod_user(uint16_t mod, uint16_t timer_idx, keyrecord_t *record) {
 }
 
 void send_mod_code(uint16_t mod, uint16_t timer_idx, uint16_t code, keyrecord_t *record) {
-  if (process_mod_user(mod, timer_idx, record)) tap_code16(code);
+  if (process_custom_register_mod(mod, timer_idx, record)) tap_code16(code);
 }
 
 void send_mod_symbol(uint16_t mod, uint16_t timer_idx, uint16_t usa_code, uint16_t rus_code, keyrecord_t *record) {
-  if (process_mod_user(mod, timer_idx, record)) send_symbol(usa_code, rus_code);
+  if (process_custom_register_mod(mod, timer_idx, record)) send_symbol(usa_code, rus_code);
 }
 
 void send_mod_usa_symbol(uint16_t mod, uint16_t timer_idx, uint16_t usa_code, keyrecord_t *record) {
-  if (process_mod_user(mod, timer_idx, record)) send_usa_symbol(usa_code);
+  if (process_custom_register_mod(mod, timer_idx, record)) send_usa_symbol(usa_code);
 }
 
 void send_mod_rus_symbol(uint16_t mod, uint16_t timer_idx, uint16_t rus_code, keyrecord_t *record) {
-  if (process_mod_user(mod, timer_idx, record)) send_rus_symbol(rus_code);
+  if (process_custom_register_mod(mod, timer_idx, record)) send_rus_symbol(rus_code);
 }
 
 uint16_t process_tapping_term(uint16_t timer_idx, keyrecord_t *record) {
