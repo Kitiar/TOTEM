@@ -263,8 +263,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //            │ CAPS LCK │ PRIN SCR │   PG UP  │          │          │ │          │          │     ↑    │  INSERT  │  NUMLCK  │
 /*    ╌┄┈┈──═*/  KC_CAPS ,  KC_PSCR ,  KC_PGUP ,  XXXXXXX ,  XXXXXXX  ,   XXXXXXX ,  XXXXXXX ,   KC_UP  ,  KC_INS  ,  KC_NUM ,
 //            ├──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┤
-//            │          │   HOME   │  PG_DOWN │    END   │          │ │          │     ←    │     ↓    │     →    │          │
-/*           */  XXXXXXX , CH_C_HOME, CH_C_PGDN, CH_C_END ,  XXXXXXX  ,   XXXXXXX , CH_C_LEFT, CH_C_DOWN, CH_C_RGHT,  XXXXXXX ,
+//            │          │   HOME   │  PG_DOWN │    END   │   APP    │ │   APP    │     ←    │     ↓    │     →    │          │
+/*           */  XXXXXXX , CH_C_HOME, CH_C_PGDN, CH_C_END ,  KC_APP   ,   KC_APP  , CH_C_LEFT, CH_C_DOWN, CH_C_RGHT,  XXXXXXX ,
 //            │          │   CTRL   │    ALT   │   SHIFT  │          │ │          │   SHIFT  │    ALT   │   CTRL   │          │
 // ┌──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤ ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┐
 // │          │          │          │          │          │          │ │          │          │          │          │          │          │
