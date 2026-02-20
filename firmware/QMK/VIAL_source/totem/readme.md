@@ -18,5 +18,5 @@ You can use this command to compile the firmware
 `qmk compile -kb totem -km default`
 
 You can use these commands to flash the left / right firmware 
-`qmk flash -kb totem -km default -bl uf2-split-left`
-`qmk flash -kb totem -km default -bl uf2-split-right`
+`qmk flash -kb totem -km default -bl uf2-split-left -e BUILD_DIR=.build_left`
+`qmk flash -kb totem -km default -bl uf2-split-right -e BUILD_DIR=.build_right`
