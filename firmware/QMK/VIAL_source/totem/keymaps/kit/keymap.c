@@ -131,6 +131,17 @@ enum custom_keycodes {
     CH_C_RGHT  /* RCTR / →    */
 };
 
+uint16_t update_basic_key_code(uint16_t keycode) {
+  uint16_t final_keycode = keycode;
+  uint16_t mods = get_mods();
+
+  if (!(mods & MOD_MASK_CTRL)  && (mod_timers[T_LCTL] > 0 || mod_timers[T_RCTL] > 0)) final_keycode = C(final_keycode);
+  if (!(mods & MOD_MASK_ALT)   && (mod_timers[T_LALT] > 0 || mod_timers[T_RALT] > 0)) final_keycode = A(final_keycode);
+  if (!(mods & MOD_MASK_SHIFT) && (mod_timers[T_LSFT] > 0 || mod_timers[T_RSFT] > 0)) final_keycode = S(final_keycode);
+
+  return final_keycode;
+}
+
 // ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 // │ d e f i n e   t a p p i n g   t e r m   r e t u r n   c o d e s                                                   │
 // └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -145,8 +156,10 @@ static uint16_t tapping_term_timers[T_TAPPING_TERM_NUM];
 
 void tapping_term_code(uint16_t timer_idx, bool is_short) {
   switch (timer_idx) {
-    case T_IE_YO:   is_short ? tap_code16(RU_IE)  : tap_code16(RU_YO);    break;
-    case T_SHA_SCH: is_short ? tap_code16(RU_SHA) : tap_code16(RU_SHCH);  break;
+    case T_IE_YO:
+      is_short ? tap_code16(update_basic_key_code(RU_IE))  : tap_code16(update_basic_key_code(RU_YO));    break;
+    case T_SHA_SCH:
+      is_short ? tap_code16(update_basic_key_code(RU_SHA)) : tap_code16(update_basic_key_code(RU_SHCH));  break;
   }
 }
 
@@ -376,6 +389,9 @@ void send_tapping_term_code(uint16_t timer_idx, keyrecord_t *record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
+        if (keycode >= QK_BASIC && keycode <= QK_BASIC_MAX) {
+            tap_code16(update_basic_key_code(keycode)); return false;
+        }
         switch (keycode) {
 //┌── c u s t o m   k e y s ───────────────────────────────────────────────────────────────────────────────────────────┐
 //│┌── l a y e r s ───────────────────────────────────────────────────────────────────────────────────────────────────┐│
